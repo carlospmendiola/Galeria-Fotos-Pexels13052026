@@ -80,11 +80,22 @@ const peticionPexels = async (accion) => {
  */
 const buscarFotos = async (consulta, pagina = 1) => {
   try {
-    const respuesta = await peticionPexels(`search?locale=${idiomaConsulta}&page=${pagina}&per_page=${imagenesPorPagina}&query=${consulta}`);
-    if (!respuesta.ok) throw respuesta.status;
+    const parametrosDeBusqueda = new URLSearchParams({ query: consulta });
+    if (orientacion) parametrosDeBusqueda.append('orientation', orientacion);
+    if (tamanio) parametrosDeBusqueda.append('size', tamanio);
+    if (color) parametrosDeBusqueda.append('color', color);
+    if (idiomaConsulta) parametrosDeBusqueda.append('locale', idiomaConsulta);
+    parametrosDeBusqueda.append('page', pagina);
+    if (imagenesPorPagina) parametrosDeBusqueda.append('per_page', imagenesPorPagina);
+    console.log(parametrosDeBusqueda.toString());
+
+    const respuesta = await peticionPexels(`search?${parametrosDeBusqueda}`);
+    if (!respuesta.ok) throw respuesta;
+
     const datos = await respuesta.json();
     if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes del filtro ${filtro}`;
     if (datos.total_results === 0) throw `Error: No existen imágenes para el filtro ${filtro}`;
+
     return datos;
   } catch (error) {
     console.log('consultaFiltro:', error);
