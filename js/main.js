@@ -1,6 +1,8 @@
 const API_KEY = 'TewSBIvF8QDVsqGh0UOmnufPlk6r9JM6l2OIJs2MOoFtuvtZbQPy2t3E';
 const IDIOMA = 'es-ES';
 const IMAGENES_POR_PAGINA = 9;
+const fragmento = document.createDocumentFragment();
+const pintarGaleria = document.querySelector('#pintarGaleria');
 
 const consultaUrl = async (url) => {
   try {
@@ -28,10 +30,48 @@ const consultaFiltro = async (filtro, pagina = 1) => {
   }
 };
 
-const pintarDatos = async () => {
+const pintarDatos = async (filtro, pagina) => {
   try {
-    const datos = await consultaFiltro('arboles');
+    const datos = await consultaFiltro(filtro, pagina);
     console.log(datos);
+
+    datos.photos.forEach(foto => {
+      console.log(foto.alt);
+
+      const article = document.createElement('article');
+      const div = document.createElement('div');
+      const img = document.createElement('img');
+      const divCaption = document.createElement('div');
+      const h3 = document.createElement('h3');
+      const favorito = document.createElement('p');
+
+      article.append(div, divCaption);
+      div.append(img);
+      img.src = foto.src['large'];
+      img.alt = foto.alt;
+      divCaption.append(h3, favorito);
+      h3.textContent = foto.alt;
+      // TODO: Recodar poner el id de la foto en un data attribute.
+      favorito.id = foto.id;
+
+      fragmento.append(article);
+
+
+      // <article>
+      //   <div>
+      //     <img src="" alt="">
+      //   </div>
+      //   <div>
+      //     <h3></h3>
+      //     <p></p>
+      //   </div>
+      // </article>
+
+    });
+
+    pintarGaleria.innerHTML = '';
+    pintarGaleria.append(fragmento);
+
   } catch (error) {
     console.log(error);
   }
