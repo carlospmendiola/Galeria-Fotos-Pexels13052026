@@ -80,6 +80,8 @@ const peticionPexels = async (accion) => {
  */
 const buscarFotos = async (consulta, pagina = 1) => {
   try {
+    if (!consulta) throw 'No se especificó consulta para buscar imágenes.';
+
     const parametrosDeBusqueda = new URLSearchParams({ query: consulta });
     if (orientacion) parametrosDeBusqueda.append('orientation', orientacion);
     if (tamanio) parametrosDeBusqueda.append('size', tamanio);
