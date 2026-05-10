@@ -15,9 +15,9 @@ const consultaUrl = async (url) => {
   }
 };
 
-const consultaFiltro = async (filtro) => {
+const consultaFiltro = async (filtro, pagina = 1) => {
   try {
-    const respuesta = await consultaUrl(`https://api.pexels.com/v1/search?locale=${IDIOMA}&per_page=${IMAGENES_POR_PAGINA}&query=${filtro}`);
+    const respuesta = await consultaUrl(`https://api.pexels.com/v1/search?locale=${IDIOMA}&page=${pagina}&per_page=${IMAGENES_POR_PAGINA}&query=${filtro}`);
     if (!respuesta.ok) throw respuesta.status;
     const datos = await respuesta.json();
     if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes del filtro ${filtro}`;
