@@ -151,4 +151,4 @@ const pintarDatos = async (filtro, pagina) => {
   }
 };
 
-pintarDatos();
+pintarDatos('arboles');
