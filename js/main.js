@@ -95,8 +95,8 @@ const buscarFotos = async (consulta, pagina = 1) => {
     if (!respuesta.ok) throw respuesta;
 
     const datos = await respuesta.json();
-    if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes del filtro ${filtro}`;
-    if (datos.total_results === 0) throw `Error: No existen imágenes para el filtro ${filtro}`;
+    if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes de la consulta '${consulta}'`;
+    if (datos.total_results === 0) throw `Error: No existen imágenes para la consulta '${consulta}'`;
 
     return datos;
   } catch (error) {
