@@ -133,7 +133,9 @@ p {
 p span{
   font-weight: 800;
 }
-p a {
+p a { 
+  text-decoration: none;
+  color: var(--color-principal)
 }
 img {
   width: 100%;
