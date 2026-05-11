@@ -45,6 +45,10 @@ const pintarDatos = async (filtro, pagina) => {
       const h3 = document.createElement('h3');
       const favorito = document.createElement('p');
 
+      article.classList.add('boxImagen','borderRadius10', 'borderBottom1px','fondoPrincipal')
+      divCaption.classList.add('boxTxt','pad25px','flexContainer')
+      h3.classList.add('colorPrincipal')
+
       article.append(div, divCaption);
       div.append(img);
       img.src = foto.src['large'];

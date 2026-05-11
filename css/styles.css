@@ -79,16 +79,8 @@ button {
 /* ===========================================
     Formato
 ============================================ */
-.w80 {
-  width: 80%;
-  margin: 20px auto;
-}
-.containerCols {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-}
+
+
 .center {
   text-align: center;
 }
@@ -120,6 +112,9 @@ button {
   border-radius: 10px;
 }
 
+.pad25px {
+  padding: 25px;
+}
 .pad20px0 {
   padding: 20px 0;
 }
@@ -134,21 +129,52 @@ button {
 .mb40px {
   margin-bottom: 40px;
 }
-
-p span {
+p {
+  font-family: var(--font-principal);
+}
+p span{
   font-weight: 800;
+}
+p a {
+}
+img {
+  width: 100%;
 }
 
 /* ===========================================
     Arquitectura páginas
 ============================================== */
+.container {
+  width: 90%;
+  margin: 20px auto;
+}
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
 
+.gridContainer {
+  display: grid;
+  grid-template: repeat(1, 1fr)/repeat(1, 1fr);
+  gap: 25px;
+}
 
+.boxImagen {
+  overflow: hidden;
+}
 
+.boxTxt h3 {
+  font:400 1.1rem/1.2 var(--font-principal);
+}
 /* ===========================================
     Responsive 768
 ============================================== */
 @media screen and (min-width:768px) {
+  .gridContainer {
+      grid-template: repeat(2, 1fr)/repeat(2, 1fr);
+    }
 
 }
 
@@ -158,6 +184,12 @@ p span {
     Responsive 990
 ============================================== */
 @media screen and (min-width:990px) {
+  .container {
+    width: 80%;
+  }
+  .gridContainer {
+    grid-template: repeat(3, 1fr)/repeat(3, 1fr);
+  }
 
 }
 
@@ -168,6 +200,9 @@ p span {
     Responsive 1200
 ============================================== */
 @media screen and (min-width:1200px) {
+  .container {
+    width: 70%;
+  }
 
 }
 
