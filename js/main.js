@@ -214,6 +214,22 @@ const pintarPaginado = (pagina, paginasTotales) => {
     fragmento.append(botonPrimeraPagina, botonPaginaAnterior, elipsis)
   }
 
+  if (pagina !== 1) {
+    const botonPaginaAnteriorNumerica = document.createElement('button');
+    botonPaginaAnteriorNumerica.textContent = pagina - 1;
+    fragmento.append(botonPaginaAnteriorNumerica);
+  }
+
+  const inputPaginaActual = document.createElement('input');
+  inputPaginaActual.value = pagina;
+  fragmento.append(inputPaginaActual);
+
+  if (pagina !== paginasTotales) {
+    const botonPaginaSiguienteNumerica = document.createElement('button');
+    botonPaginaSiguienteNumerica.textContent = pagina + 1;
+    fragmento.append(botonPaginaSiguienteNumerica);
+  }
+
 
   if (pagina <= paginasTotales - 1) {
     const botonUltimaPagina = document.createElement('button')
