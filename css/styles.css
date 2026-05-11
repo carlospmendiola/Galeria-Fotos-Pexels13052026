@@ -43,7 +43,7 @@ h1 {
 }
 
 p {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 .fontPrincipal {
   font-family: var(--font-principal);
@@ -56,13 +56,13 @@ button {
 }
 
 .fztitle {
-  font-size: 2.1rem;
+  font-size: 1.8rem;
 }
 .fzsubtitle {
-  font-size: 2.2rem;
+  font-size: 1.4rem;
 }
 .fztxt {
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 .lh-titles {
   line-height: 1.1;

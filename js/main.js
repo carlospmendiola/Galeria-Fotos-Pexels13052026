@@ -43,8 +43,15 @@
  */
 
 const API_KEY = 'TewSBIvF8QDVsqGh0UOmnufPlk6r9JM6l2OIJs2MOoFtuvtZbQPy2t3E';
+const URL_BASE = 'https://api.pexels.com/v1'
 const fragmento = document.createDocumentFragment();
 const pintarGaleria = document.querySelector('#pintarGaleria');
+const sectionCategorias = document.querySelector ('#sectionCategorias')
+const categorias = [
+  {nombre:'coches',idFoto: 35035526},
+  {nombre:'animales', idFoto: 34806620},
+  {nombre:'rascacielos', idFoto: 30657712},
+]
 
 // Variables globales y valores por defecto de parámetros de búsqueda de Pexels.
 // TODO: Definir ¿enumeraciones? para los valores de las opciones.
@@ -61,7 +68,7 @@ let imagenesPorPagina = 9;
  */
 const peticionPexels = async (accion) => {
   try {
-    const peticion = fetch(`https://api.pexels.com/v1/${accion}`, {
+    const peticion = fetch(`${URL_BASE}/${accion}`, {
       headers: {
         'Authorization': API_KEY,
       },
@@ -179,4 +186,19 @@ const pintarDatos = async (categoria, pagina) => {
   }
 };
 
+const pintarCategorias = (categorias) => {
+  const ul = document.createElement ('ul')
+
+  categorias.forEach ((categoria) => {
+    const li = document.createElement('li')
+    const button = document.createElement('button')
+    button.textContent = categoria.nombre
+    
+    li.append(button)
+    ul.append(li)
+  })
+  sectionCategorias.append(ul)
+} 
+
+pintarCategorias(categorias);
 pintarDatos('arboles');
