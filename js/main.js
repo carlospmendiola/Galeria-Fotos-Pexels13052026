@@ -61,13 +61,15 @@ let tamanio = 'small';
 let color = undefined;
 let idiomaConsulta = 'es-ES';
 let imagenesPorPagina = 9;
-let paginaActual = 1; 
+let paginaActual = 1;
+let categoriaActual = '';
 
 //EVENTOS
 document.addEventListener ('click',ev => {
   if (ev.target.matches ('#sectionCategorias button' )){
+    categoriaActual = ev.target.textContent
     paginaActual = 1
-    pintarDatos(ev.target.textContent);
+    pintarDatos(categoriaActual, paginaActual);
   }
 })
 
@@ -149,6 +151,8 @@ const pintarDatos = async (categoria, pagina) => {
   try {
     const datos = await buscarFotos(categoria, pagina);
     console.log(datos);
+    const paginasTotales = Math.ceil(datos.total_results/datos.per_page)
+    pintarPaginado(paginasTotales);
 
     datos.photos.forEach(foto => {
       console.log(foto.alt);
@@ -191,10 +195,39 @@ const pintarDatos = async (categoria, pagina) => {
     sectionGaleria.innerHTML = '';
     sectionGaleria.append(fragmento);
 
+    
+
   } catch (error) {
     console.log(error);
   }
 };
+const pintarPaginado = (paginasTotales) => {
+  if (paginaActual>=2){
+    const botonPrimeraPagina = document.createElement('button')
+    const botonPaginaAnterior = document.createElement('button')
+    const elipsis = document.createElement('span')
+    botonPrimeraPagina.textContent = '<<'
+    botonPrimeraPagina.id = "botonPrimeraPagina"
+    botonPaginaAnterior.textContent = '<'
+    botonPaginaAnterior.id = "botonPaginaAnterior"
+    elipsis.textContent = "..."
+    fragmento.append(botonPrimeraPagina,botonPaginaAnterior,elipsis)
+  }
+
+
+if (paginaActual<=paginasTotales - 1){
+    const botonUltimaPagina = document.createElement('button')
+    const botonPaginaSiguiente = document.createElement('button')
+    const elipsis = document.createElement('span')
+    botonUltimaPagina.textContent = '>>'
+    botonUltimaPagina.id = "botonUltimaPagina"
+    botonPaginaSiguiente.textContent = '>'
+    botonPaginaSiguiente.id = "botonPaginaSiguiente"
+    elipsis.textContent = "..."
+    fragmento.append(elipsis,botonPaginaSiguiente,botonUltimaPagina)
+  }
+  sectionPaginado.append(fragmento)
+}
 
 const pintarCategorias = (categorias) => {
   const ul = document.createElement ('ul')
@@ -212,6 +245,7 @@ const pintarCategorias = (categorias) => {
   sectionCategorias.append(ul)
 
 } 
+
 
 pintarCategorias(categorias);
 
