@@ -192,8 +192,7 @@ const pintarGaleria = async (categoria, pagina) => {
 
     });
 
-    sectionGaleria.innerHTML = '';
-    sectionGaleria.append(fragmento);
+    sectionGaleria.replaceChildren(fragmento);
 
 
 
@@ -227,7 +226,7 @@ const pintarPaginado = (pagina, paginasTotales) => {
     elipsis.textContent = "..."
     fragmento.append(elipsis, botonPaginaSiguiente, botonUltimaPagina)
   }
-  sectionPaginado.append(fragmento)
+  sectionPaginado.replaceChildren(fragmento)
 }
 
 const pintarCategorias = (categorias) => {
@@ -243,7 +242,7 @@ const pintarCategorias = (categorias) => {
     ul.append(li)
   })
   ul.classList.add('flexContainer')
-  sectionCategorias.append(ul)
+  sectionCategorias.replaceChildren(ul)
 
 }
 
