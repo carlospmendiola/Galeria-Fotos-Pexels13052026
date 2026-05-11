@@ -152,7 +152,7 @@ const pintarGaleria = async (categoria, pagina) => {
     const datos = await buscarFotos(categoria, pagina);
     console.log(datos);
     const paginasTotales = Math.ceil(datos.total_results / datos.per_page)
-    pintarPaginado(paginasTotales);
+    pintarPaginado(pagina, paginasTotales);
 
     datos.photos.forEach(foto => {
       console.log(foto.alt);
@@ -202,7 +202,7 @@ const pintarGaleria = async (categoria, pagina) => {
   }
 };
 
-const pintarPaginado = (paginasTotales) => {
+const pintarPaginado = (pagina, paginasTotales) => {
   if (paginaActual >= 2) {
     const botonPrimeraPagina = document.createElement('button')
     const botonPaginaAnterior = document.createElement('button')
