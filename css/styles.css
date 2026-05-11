@@ -102,6 +102,9 @@ button {
   border: 1px solid var(--color-negro-25)
 }
 
+.borderTop1px {
+  border-top: 1px solid var(--color-separacion)
+}
 .borderBottom1px {
   border-bottom: 1px solid var(--color-separacion)
 }
@@ -118,6 +121,12 @@ button {
 }
 .pb20px {
   padding-bottom: 20px;
+}
+.p10px {
+  padding: 10px;
+}
+.pb50px {
+  padding-bottom: 50px;
 }
 
 .mt40px {
