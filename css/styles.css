@@ -39,9 +39,7 @@ table {
     Formato textos
 ============================================== */
 h1 {
-  font-size: 2.3rem;
-  font-family: var(--font-secundaria);
-  font-weight: 400;
+  font: 400 2rem/1.1 var(--font-secundaria);
 }
 
 p {
@@ -58,7 +56,7 @@ button {
 }
 
 .fztitle {
-  font-size: 2.4rem;
+  font-size: 2.1rem;
 }
 .fzsubtitle {
   font-size: 2.2rem;
