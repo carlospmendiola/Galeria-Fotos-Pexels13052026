@@ -45,7 +45,7 @@
 const API_KEY = 'TewSBIvF8QDVsqGh0UOmnufPlk6r9JM6l2OIJs2MOoFtuvtZbQPy2t3E';
 const URL_BASE = 'https://api.pexels.com/v1'
 const fragmento = document.createDocumentFragment();
-const pintarGaleria = document.querySelector('#pintarGaleria');
+const sectionGaleria = document.querySelector('#sectionGaleria');
 const sectionCategorias = document.querySelector ('#sectionCategorias')
 const categorias = [
   {nombre:'coches',idFoto: 35035526},
@@ -178,8 +178,8 @@ const pintarDatos = async (categoria, pagina) => {
 
     });
 
-    pintarGaleria.innerHTML = '';
-    pintarGaleria.append(fragmento);
+    sectionGaleria.innerHTML = '';
+    sectionGaleria.append(fragmento);
 
   } catch (error) {
     console.log(error);
