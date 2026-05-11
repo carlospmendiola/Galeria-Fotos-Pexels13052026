@@ -46,12 +46,12 @@ const API_KEY = 'TewSBIvF8QDVsqGh0UOmnufPlk6r9JM6l2OIJs2MOoFtuvtZbQPy2t3E';
 const URL_BASE = 'https://api.pexels.com/v1'
 const fragmento = document.createDocumentFragment();
 const sectionGaleria = document.querySelector('#sectionGaleria');
-const sectionCategorias = document.querySelector ('#sectionCategorias')
-const sectionPaginado = document.querySelector ('#sectionPaginado')
+const sectionCategorias = document.querySelector('#sectionCategorias')
+const sectionPaginado = document.querySelector('#sectionPaginado')
 const categorias = [
-  {nombre:'coches',idFoto: 35035526},
-  {nombre:'animales', idFoto: 34806620},
-  {nombre:'rascacielos', idFoto: 30657712},
+  { nombre: 'coches', idFoto: 35035526 },
+  { nombre: 'animales', idFoto: 34806620 },
+  { nombre: 'rascacielos', idFoto: 30657712 },
 ]
 
 // Variables globales y valores por defecto de parámetros de búsqueda de Pexels.
@@ -65,8 +65,8 @@ let paginaActual = 1;
 let categoriaActual = '';
 
 //EVENTOS
-document.addEventListener ('click',ev => {
-  if (ev.target.matches ('#sectionCategorias button' )){
+document.addEventListener('click', ev => {
+  if (ev.target.matches('#sectionCategorias button')) {
     categoriaActual = ev.target.textContent
     paginaActual = 1
     pintarDatos(categoriaActual, paginaActual);
@@ -151,7 +151,7 @@ const pintarDatos = async (categoria, pagina) => {
   try {
     const datos = await buscarFotos(categoria, pagina);
     console.log(datos);
-    const paginasTotales = Math.ceil(datos.total_results/datos.per_page)
+    const paginasTotales = Math.ceil(datos.total_results / datos.per_page)
     pintarPaginado(paginasTotales);
 
     datos.photos.forEach(foto => {
@@ -164,8 +164,8 @@ const pintarDatos = async (categoria, pagina) => {
       const h3 = document.createElement('h3');
       const favorito = document.createElement('p');
 
-      article.classList.add('boxImagen','borderRadius10', 'borderBottom1px','fondoPrincipal')
-      divCaption.classList.add('boxTxt','pad25px','flexContainer')
+      article.classList.add('boxImagen', 'borderRadius10', 'borderBottom1px', 'fondoPrincipal')
+      divCaption.classList.add('boxTxt', 'pad25px', 'flexContainer')
       h3.classList.add('colorPrincipal')
 
       article.append(div, divCaption);
@@ -195,14 +195,15 @@ const pintarDatos = async (categoria, pagina) => {
     sectionGaleria.innerHTML = '';
     sectionGaleria.append(fragmento);
 
-    
+
 
   } catch (error) {
     console.log(error);
   }
 };
+
 const pintarPaginado = (paginasTotales) => {
-  if (paginaActual>=2){
+  if (paginaActual >= 2) {
     const botonPrimeraPagina = document.createElement('button')
     const botonPaginaAnterior = document.createElement('button')
     const elipsis = document.createElement('span')
@@ -211,11 +212,11 @@ const pintarPaginado = (paginasTotales) => {
     botonPaginaAnterior.textContent = '<'
     botonPaginaAnterior.id = "botonPaginaAnterior"
     elipsis.textContent = "..."
-    fragmento.append(botonPrimeraPagina,botonPaginaAnterior,elipsis)
+    fragmento.append(botonPrimeraPagina, botonPaginaAnterior, elipsis)
   }
 
 
-if (paginaActual<=paginasTotales - 1){
+  if (paginaActual <= paginasTotales - 1) {
     const botonUltimaPagina = document.createElement('button')
     const botonPaginaSiguiente = document.createElement('button')
     const elipsis = document.createElement('span')
@@ -224,19 +225,19 @@ if (paginaActual<=paginasTotales - 1){
     botonPaginaSiguiente.textContent = '>'
     botonPaginaSiguiente.id = "botonPaginaSiguiente"
     elipsis.textContent = "..."
-    fragmento.append(elipsis,botonPaginaSiguiente,botonUltimaPagina)
+    fragmento.append(elipsis, botonPaginaSiguiente, botonUltimaPagina)
   }
   sectionPaginado.append(fragmento)
 }
 
 const pintarCategorias = (categorias) => {
-  const ul = document.createElement ('ul')
+  const ul = document.createElement('ul')
 
-  categorias.forEach ((categoria) => {
+  categorias.forEach((categoria) => {
     const li = document.createElement('li')
     const button = document.createElement('button')
     button.textContent = categoria.nombre
-    button.classList.add('borderNormal','borderRadius10','txtCapitalize')
+    button.classList.add('borderNormal', 'borderRadius10', 'txtCapitalize')
 
     li.append(button)
     ul.append(li)
@@ -244,8 +245,7 @@ const pintarCategorias = (categorias) => {
   ul.classList.add('flexContainer')
   sectionCategorias.append(ul)
 
-} 
+}
 
 
 pintarCategorias(categorias);
-
