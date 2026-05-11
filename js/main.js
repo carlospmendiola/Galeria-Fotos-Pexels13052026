@@ -61,6 +61,13 @@ let color = undefined;
 let idiomaConsulta = 'es-ES';
 let imagenesPorPagina = 9;
 
+//EVENTOS
+document.addEventListener ('click',ev => {
+  if (ev.target.matches ('#sectionCategorias button' )){
+    pintarDatos(ev.target.textContent);
+  }
+})
+
 /**
  * Petición a Pexels
  * @param {*} accion Acción a solicitar al API de Pexels.
@@ -196,7 +203,7 @@ const pintarCategorias = (categorias) => {
     li.classList.add('borderBottom1px')
     button.classList.add('borderNormal','borderRadius10')
 
-    
+
     li.append(button)
     ul.append(li)
   })
@@ -206,4 +213,4 @@ const pintarCategorias = (categorias) => {
 } 
 
 pintarCategorias(categorias);
-pintarDatos('arboles');
+
