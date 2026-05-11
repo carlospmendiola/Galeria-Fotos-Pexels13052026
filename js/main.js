@@ -225,12 +225,12 @@ const pintarGaleria = async (categoria, pagina) => {
 };
 
 const pintarPaginado = (pagina, paginasTotales) => {
-  if (pagina > 1) {
-    const botonPaginaAnterior = document.createElement('button')
-    botonPaginaAnterior.textContent = '<'
-    botonPaginaAnterior.value = pagina - 1;
-    fragmento.append(botonPaginaAnterior)
-  }
+  // if (pagina > 1) {
+  //   const botonPaginaAnterior = document.createElement('button')
+  //   botonPaginaAnterior.textContent = '<'
+  //   botonPaginaAnterior.value = pagina - 1;
+  //   fragmento.append(botonPaginaAnterior)
+  // }
 
   if (pagina > 2) {
     const botonPrimeraPagina = document.createElement('button')
@@ -277,12 +277,12 @@ const pintarPaginado = (pagina, paginasTotales) => {
     fragmento.append(botonUltimaPagina)
   }
 
-  if (pagina < paginasTotales) {
-    const botonPaginaSiguiente = document.createElement('button')
-    botonPaginaSiguiente.textContent = '>'
-    botonPaginaSiguiente.value = pagina + 1;
-    fragmento.append(botonPaginaSiguiente)
-  }
+  // if (pagina < paginasTotales) {
+  //   const botonPaginaSiguiente = document.createElement('button')
+  //   botonPaginaSiguiente.textContent = '>'
+  //   botonPaginaSiguiente.value = pagina + 1;
+  //   fragmento.append(botonPaginaSiguiente)
+  // }
   sectionPaginado.replaceChildren(fragmento)
 }
 
