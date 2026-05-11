@@ -53,8 +53,11 @@ p {
 }
 button {
   padding: 15px 35px;
+  cursor: pointer;
 }
-
+.txtCapitalize {
+  text-transform: capitalize;
+}
 .fztitle {
   font-size: 1.8rem;
 }

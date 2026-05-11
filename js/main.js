@@ -47,6 +47,7 @@ const URL_BASE = 'https://api.pexels.com/v1'
 const fragmento = document.createDocumentFragment();
 const sectionGaleria = document.querySelector('#sectionGaleria');
 const sectionCategorias = document.querySelector ('#sectionCategorias')
+const sectionPaginado = document.querySelector ('#sectionPaginado')
 const categorias = [
   {nombre:'coches',idFoto: 35035526},
   {nombre:'animales', idFoto: 34806620},
@@ -60,10 +61,12 @@ let tamanio = 'small';
 let color = undefined;
 let idiomaConsulta = 'es-ES';
 let imagenesPorPagina = 9;
+let paginaActual = 1; 
 
 //EVENTOS
 document.addEventListener ('click',ev => {
   if (ev.target.matches ('#sectionCategorias button' )){
+    paginaActual = 1
     pintarDatos(ev.target.textContent);
   }
 })
@@ -200,8 +203,7 @@ const pintarCategorias = (categorias) => {
     const li = document.createElement('li')
     const button = document.createElement('button')
     button.textContent = categoria.nombre
-    button.classList.add('borderNormal','borderRadius10')
-
+    button.classList.add('borderNormal','borderRadius10','txtCapitalize')
 
     li.append(button)
     ul.append(li)
