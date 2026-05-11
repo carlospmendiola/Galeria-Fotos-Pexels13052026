@@ -193,11 +193,16 @@ const pintarCategorias = (categorias) => {
     const li = document.createElement('li')
     const button = document.createElement('button')
     button.textContent = categoria.nombre
+    li.classList.add('borderBottom1px')
+    button.classList.add('borderNormal','borderRadius10')
+
     
     li.append(button)
     ul.append(li)
   })
+  ul.classList.add('flexContainer')
   sectionCategorias.append(ul)
+
 } 
 
 pintarCategorias(categorias);
