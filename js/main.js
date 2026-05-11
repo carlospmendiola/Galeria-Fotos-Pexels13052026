@@ -44,6 +44,7 @@
 
 const API_KEY = 'TewSBIvF8QDVsqGh0UOmnufPlk6r9JM6l2OIJs2MOoFtuvtZbQPy2t3E';
 const URL_BASE = 'https://api.pexels.com/v1'
+// Pexels limita a las API_KEY gratuítas la cantidad máxima de imágenes que deja recoger a 480.
 const PEXELS_MAX_IMAGES_API = 480;
 const fragmento = document.createDocumentFragment();
 const sectionGaleria = document.querySelector('#sectionGaleria');
