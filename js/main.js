@@ -69,7 +69,7 @@ document.addEventListener('click', ev => {
   if (ev.target.matches('#sectionCategorias button')) {
     categoriaActual = ev.target.textContent
     paginaActual = 1
-    pintarDatos(categoriaActual, paginaActual);
+    pintarGaleria(categoriaActual, paginaActual);
   }
 })
 
@@ -147,7 +147,7 @@ const obtenerFoto = async (id) => {
   }
 };
 
-const pintarDatos = async (categoria, pagina) => {
+const pintarGaleria = async (categoria, pagina) => {
   try {
     const datos = await buscarFotos(categoria, pagina);
     console.log(datos);
