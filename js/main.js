@@ -202,7 +202,7 @@ const pintarGaleria = async (categoria, pagina) => {
 };
 
 const pintarPaginado = (pagina, paginasTotales) => {
-  if (paginaActual >= 2) {
+  if (pagina >= 2) {
     const botonPrimeraPagina = document.createElement('button')
     const botonPaginaAnterior = document.createElement('button')
     const elipsis = document.createElement('span')
@@ -215,7 +215,7 @@ const pintarPaginado = (pagina, paginasTotales) => {
   }
 
 
-  if (paginaActual <= paginasTotales - 1) {
+  if (pagina <= paginasTotales - 1) {
     const botonUltimaPagina = document.createElement('button')
     const botonPaginaSiguiente = document.createElement('button')
     const elipsis = document.createElement('span')
