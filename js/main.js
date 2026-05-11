@@ -74,15 +74,15 @@ const peticionPexels = async (accion) => {
 
 /**
  * Devuelve un PexelsSearchResponse para los parámetros de busqueda que se le pasan.
- * @param {string} consulta Filtro por el que buscar.
+ * @param {string} categoria Categoría por el que buscar.
  * @param {number} pagina Página del resultado de búsqueda a recoger.
  * @returns {Promise<PexelsSearchResponse>}
  */
-const buscarFotos = async (consulta, pagina = 1) => {
+const buscarFotos = async (categoria, pagina = 1) => {
   try {
-    if (!consulta) throw 'No se especificó consulta para buscar imágenes.';
+    if (!categoria) throw 'No se especificó categoria para buscar imágenes.';
 
-    const parametrosDeBusqueda = new URLSearchParams({ query: consulta });
+    const parametrosDeBusqueda = new URLSearchParams({ query: categoria });
     if (orientacion) parametrosDeBusqueda.append('orientation', orientacion);
     if (tamanio) parametrosDeBusqueda.append('size', tamanio);
     if (color) parametrosDeBusqueda.append('color', color);
@@ -95,8 +95,8 @@ const buscarFotos = async (consulta, pagina = 1) => {
     if (!respuesta.ok) throw respuesta.status;
 
     const datos = await respuesta.json();
-    if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes de la consulta '${consulta}'`;
-    if (datos.total_results === 0) throw `Error: No existen imágenes para la consulta '${consulta}'`;
+    if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes de la categoría '${categoria}'`;
+    if (datos.total_results === 0) throw `Error: No existen imágenes para la categoría '${categoria}'`;
 
     return datos;
   } catch (error) {
@@ -128,9 +128,9 @@ const obtenerFoto = async (id) => {
   }
 };
 
-const pintarDatos = async (filtro, pagina) => {
+const pintarDatos = async (categoria, pagina) => {
   try {
-    const datos = await buscarFotos(filtro, pagina);
+    const datos = await buscarFotos(categoria, pagina);
     console.log(datos);
 
     datos.photos.forEach(foto => {
