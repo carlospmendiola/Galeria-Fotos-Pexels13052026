@@ -71,6 +71,9 @@ document.addEventListener('click', ev => {
     categoriaActual = ev.target.textContent
     paginaActual = 1
     pintarGaleria(categoriaActual, paginaActual);
+  } else if (ev.target.matches('#sectionPaginado button')) {
+    paginaActual = Number(ev.target.value);
+    pintarGaleria(categoriaActual, paginaActual);
   }
 })
 
@@ -209,14 +212,14 @@ const pintarPaginado = (pagina, paginasTotales) => {
   if (pagina > 1) {
     const botonPaginaAnterior = document.createElement('button')
     botonPaginaAnterior.textContent = '<'
-    botonPaginaAnterior.id = "botonPaginaAnterior"
+    botonPaginaAnterior.value = pagina - 1;
     fragmento.append(botonPaginaAnterior)
   }
 
   if (pagina > 2) {
     const botonPrimeraPagina = document.createElement('button')
     botonPrimeraPagina.textContent = '1'
-    botonPrimeraPagina.id = "botonPrimeraPagina"
+    botonPrimeraPagina.value = 1;
     fragmento.append(botonPrimeraPagina)
   }
 
@@ -229,16 +232,19 @@ const pintarPaginado = (pagina, paginasTotales) => {
   if (pagina !== 1) {
     const botonPaginaAnteriorNumerica = document.createElement('button');
     botonPaginaAnteriorNumerica.textContent = pagina - 1;
+    botonPaginaAnteriorNumerica.value = pagina - 1;
     fragmento.append(botonPaginaAnteriorNumerica);
   }
 
   const inputPaginaActual = document.createElement('input');
+  inputPaginaActual.value = pagina;
   inputPaginaActual.value = pagina;
   fragmento.append(inputPaginaActual);
 
   if (pagina !== paginasTotales) {
     const botonPaginaSiguienteNumerica = document.createElement('button');
     botonPaginaSiguienteNumerica.textContent = pagina + 1;
+    botonPaginaSiguienteNumerica.value = pagina + 1;
     fragmento.append(botonPaginaSiguienteNumerica);
   }
 
@@ -251,14 +257,14 @@ const pintarPaginado = (pagina, paginasTotales) => {
   if (pagina < paginasTotales - 1) {
     const botonUltimaPagina = document.createElement('button')
     botonUltimaPagina.textContent = paginasTotales
-    botonUltimaPagina.id = "botonUltimaPagina"
+    botonUltimaPagina.value = paginasTotales;
     fragmento.append(botonUltimaPagina)
   }
 
   if (pagina < paginasTotales) {
     const botonPaginaSiguiente = document.createElement('button')
     botonPaginaSiguiente.textContent = '>'
-    botonPaginaSiguiente.id = "botonPaginaSiguiente"
+    botonPaginaSiguiente.value = pagina + 1;
     fragmento.append(botonPaginaSiguiente)
   }
   sectionPaginado.replaceChildren(fragmento)
