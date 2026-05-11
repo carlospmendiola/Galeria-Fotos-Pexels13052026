@@ -73,7 +73,7 @@ const peticionPexels = async (accion) => {
 };
 
 /**
- *
+ * Devuelve un PexelsSearchResponse para los parámetros de busqueda que se le pasan.
  * @param {string} consulta Filtro por el que buscar.
  * @param {number} pagina Página del resultado de búsqueda a recoger.
  * @returns {Promise<PexelsSearchResponse>}
@@ -176,4 +176,3 @@ const pintarDatos = async (filtro, pagina) => {
 };
 
 pintarDatos('arboles');
-obtenerFoto(37114276);
