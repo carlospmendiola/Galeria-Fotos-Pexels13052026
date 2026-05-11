@@ -44,6 +44,7 @@
 
 const API_KEY = 'TewSBIvF8QDVsqGh0UOmnufPlk6r9JM6l2OIJs2MOoFtuvtZbQPy2t3E';
 const URL_BASE = 'https://api.pexels.com/v1'
+const PEXELS_MAX_IMAGES_API = 480;
 const fragmento = document.createDocumentFragment();
 const sectionGaleria = document.querySelector('#sectionGaleria');
 const sectionCategorias = document.querySelector('#sectionCategorias')
@@ -149,9 +150,12 @@ const obtenerFoto = async (id) => {
 
 const pintarGaleria = async (categoria, pagina) => {
   try {
+    const paginasLimiteApi = Math.floor(PEXELS_MAX_IMAGES_API / imagenesPorPagina);
+    pagina = Math.min(pagina, paginasLimiteApi);
+
     const datos = await buscarFotos(categoria, pagina);
+    const paginasTotales = Math.min(Math.ceil(datos.total_results / datos.per_page), paginasLimiteApi);
     console.log(datos);
-    const paginasTotales = Math.ceil(datos.total_results / datos.per_page)
     pintarPaginado(pagina, paginasTotales);
 
     datos.photos.forEach(foto => {
