@@ -202,16 +202,24 @@ const pintarGaleria = async (categoria, pagina) => {
 };
 
 const pintarPaginado = (pagina, paginasTotales) => {
-  if (pagina >= 2) {
-    const botonPrimeraPagina = document.createElement('button')
+  if (pagina > 1) {
     const botonPaginaAnterior = document.createElement('button')
-    const elipsis = document.createElement('span')
-    botonPrimeraPagina.textContent = '<<'
-    botonPrimeraPagina.id = "botonPrimeraPagina"
     botonPaginaAnterior.textContent = '<'
     botonPaginaAnterior.id = "botonPaginaAnterior"
+    fragmento.append(botonPaginaAnterior)
+  }
+
+  if (pagina > 2) {
+    const botonPrimeraPagina = document.createElement('button')
+    botonPrimeraPagina.textContent = '1'
+    botonPrimeraPagina.id = "botonPrimeraPagina"
+    fragmento.append(botonPrimeraPagina)
+  }
+
+  if (pagina > 3) {
+    const elipsis = document.createElement('span')
     elipsis.textContent = "..."
-    fragmento.append(botonPrimeraPagina, botonPaginaAnterior, elipsis)
+    fragmento.append(elipsis)
   }
 
   if (pagina !== 1) {
@@ -230,17 +238,24 @@ const pintarPaginado = (pagina, paginasTotales) => {
     fragmento.append(botonPaginaSiguienteNumerica);
   }
 
-
-  if (pagina <= paginasTotales - 1) {
-    const botonUltimaPagina = document.createElement('button')
-    const botonPaginaSiguiente = document.createElement('button')
+  if (pagina < paginasTotales - 2) {
     const elipsis = document.createElement('span')
-    botonUltimaPagina.textContent = '>>'
+    elipsis.textContent = "..."
+    fragmento.append(elipsis)
+  }
+
+  if (pagina < paginasTotales - 1) {
+    const botonUltimaPagina = document.createElement('button')
+    botonUltimaPagina.textContent = paginasTotales
     botonUltimaPagina.id = "botonUltimaPagina"
+    fragmento.append(botonUltimaPagina)
+  }
+
+  if (pagina < paginasTotales) {
+    const botonPaginaSiguiente = document.createElement('button')
     botonPaginaSiguiente.textContent = '>'
     botonPaginaSiguiente.id = "botonPaginaSiguiente"
-    elipsis.textContent = "..."
-    fragmento.append(elipsis, botonPaginaSiguiente, botonUltimaPagina)
+    fragmento.append(botonPaginaSiguiente)
   }
   sectionPaginado.replaceChildren(fragmento)
 }
