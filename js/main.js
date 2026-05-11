@@ -77,6 +77,21 @@ document.addEventListener('click', ev => {
   }
 })
 
+document.addEventListener('keypress', (ev) => {
+  if (ev.target.matches('#sectionPaginado input') && ev.key === 'Enter') {
+    const paginaIntroducida = ev.target.value.trim().replace(',', '.');
+    if (paginaIntroducida === '' || isNaN(paginaIntroducida)) return;
+    const paginaSaneada = Math.max(1, Math.min(Math.floor(paginaIntroducida), Math.floor(PEXELS_MAX_IMAGES_API / imagenesPorPagina)));
+    if (Number(ev.target.value) !== paginaSaneada)
+      ev.target.value = paginaSaneada;
+    else if (paginaSaneada !== paginaActual) {
+      console.log(paginaSaneada, paginaActual);
+      paginaActual = paginaSaneada;
+      pintarGaleria(categoriaActual, paginaActual);
+    }
+  }
+});
+
 /**
  * Petición a Pexels
  * @param {*} accion Acción a solicitar al API de Pexels.
