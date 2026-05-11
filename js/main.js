@@ -92,7 +92,7 @@ const buscarFotos = async (consulta, pagina = 1) => {
     console.log(parametrosDeBusqueda.toString());
 
     const respuesta = await peticionPexels(`search?${parametrosDeBusqueda}`);
-    if (!respuesta.ok) throw respuesta;
+    if (!respuesta.ok) throw respuesta.status;
 
     const datos = await respuesta.json();
     if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes de la consulta '${consulta}'`;
@@ -100,7 +100,7 @@ const buscarFotos = async (consulta, pagina = 1) => {
 
     return datos;
   } catch (error) {
-    console.log('consultaFiltro:', error);
+    console.log('buscarFotos:', error);
   }
 };
 
