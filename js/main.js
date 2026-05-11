@@ -104,6 +104,30 @@ const buscarFotos = async (consulta, pagina = 1) => {
   }
 };
 
+/**
+ * Devuelve un objeto PexelsPhoto a partir del id que se le pasa.
+ * @param {number} id
+ * @returns {Promise<PexelsPhoto>}
+ */
+const obtenerFoto = async (id) => {
+  try {
+    if (!id && typeof id !== 'number') throw 'Error: No se ha pasado un id válido.';
+
+    const respuesta = await peticionPexels(`photos/${id}`);
+    if (!respuesta.ok) throw respuesta.status;
+
+    const datos = await respuesta.json();
+
+    if (datos.id !== id) throw 'Error: No se ha recuperado la foto especificada.';
+
+    console.log(datos);
+
+    return datos;
+  } catch (error) {
+    console.log('obtenerFoto:', error);
+  }
+};
+
 const pintarDatos = async (filtro, pagina) => {
   try {
     const datos = await buscarFotos(filtro, pagina);
@@ -152,3 +176,4 @@ const pintarDatos = async (filtro, pagina) => {
 };
 
 pintarDatos('arboles');
+obtenerFoto(37114276);
