@@ -93,7 +93,6 @@ document.addEventListener('keypress', (ev) => {
     if (Number(ev.target.value) !== paginaSaneada)
       ev.target.value = paginaSaneada;
     else if (paginaSaneada !== paginaActual) {
-      console.log(paginaSaneada, paginaActual);
       paginaActual = paginaSaneada;
       pintarGaleria(categoriaActual, paginaActual);
     }
@@ -135,7 +134,6 @@ const buscarFotos = async (categoria, pagina = 1) => {
     if (idiomaConsulta) parametrosDeBusqueda.append('locale', idiomaConsulta);
     parametrosDeBusqueda.append('page', pagina);
     if (imagenesPorPagina) parametrosDeBusqueda.append('per_page', imagenesPorPagina);
-    console.log(parametrosDeBusqueda.toString());
 
     const respuesta = await peticionPexels(`search?${parametrosDeBusqueda}`);
     if (!respuesta.ok) throw respuesta.status;
@@ -166,8 +164,6 @@ const obtenerFoto = async (id) => {
 
     if (datos.id !== id) throw 'Error: No se ha recuperado la foto especificada.';
 
-    console.log(datos);
-
     return datos;
   } catch (error) {
     console.log('obtenerFoto:', error);
@@ -181,12 +177,9 @@ const pintarGaleria = async (categoria, pagina) => {
 
     const datos = await buscarFotos(categoria, pagina);
     const paginasTotales = Math.min(Math.ceil(datos.total_results / datos.per_page), paginasLimiteApi);
-    console.log(datos);
     pintarPaginado(pagina, paginasTotales);
 
     datos.photos.forEach(foto => {
-      console.log(foto.alt);
-
       const article = document.createElement('article');
       const div = document.createElement('div');
       const img = document.createElement('img');
