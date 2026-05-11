@@ -67,14 +67,22 @@ let categoriaActual = '';
 
 //EVENTOS
 document.addEventListener('click', ev => {
+  let repintarGaleria = false;
+
   if (ev.target.matches('#sectionCategorias button')) {
-    categoriaActual = ev.target.textContent
-    paginaActual = 1
-    pintarGaleria(categoriaActual, paginaActual);
+    if (categoriaActual !== ev.target.textContent) {
+      categoriaActual = ev.target.textContent;
+      paginaActual = 1;
+      repintarGaleria = true;
+    }
   } else if (ev.target.matches('#sectionPaginado button')) {
-    paginaActual = Number(ev.target.value);
-    pintarGaleria(categoriaActual, paginaActual);
+    if (paginaActual !== Number(ev.target.value)) {
+      paginaActual = Number(ev.target.value);
+      repintarGaleria = true;
+    }
   }
+
+  if (repintarGaleria) pintarGaleria(categoriaActual, paginaActual);
 })
 
 document.addEventListener('keypress', (ev) => {
