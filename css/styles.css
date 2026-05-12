@@ -270,9 +270,6 @@ input {
 .mostrar {
   display: block;
 }
-.ocultar {
-  display: none;
-}
 .cerrar {
   position: absolute;
   top: 1rem;

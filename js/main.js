@@ -164,9 +164,8 @@ document.addEventListener('click', ev => {
     localStorage.setItem('favoritos', JSON.stringify(favoritos))
   } else if (ev.target.matches('#botonFavoritos')) {
     modalFavoritos.classList.add('mostrar');
-    modalFavoritos.classList.remove('ocultar');
   } else if (ev.target.matches('#btnCerrar')) {
-    modalFavoritos.classList.add('ocultar');
+    modalFavoritos.classList.remove('mostrar');
   } else if (ev.target.matches('#botonInicio')) {
     sectionCategorias.innerHTML = '';
     sectionFiltrado.innerHTML = '';
