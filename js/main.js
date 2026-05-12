@@ -53,12 +53,15 @@ const sectionCategorias = document.querySelector('#sectionCategorias')
 const sectionPaginado = document.querySelector('#sectionPaginado')
 const sectionFiltrado = document.querySelector('#sectionFiltrado');
 const modalFavoritos = document.querySelector('#modalFavoritos');
+const btnCerrar = document.querySelector('#btnCerrar');
 const categorias = [
   { nombre: 'coches', idFoto: 35035526 },
   { nombre: 'animales', idFoto: 34806620 },
   { nombre: 'rascacielos', idFoto: 30657712 },
 ]
 const favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
+
+
 
 // Variables globales y valores por defecto de parámetros de búsqueda de Pexels.
 // TODO: Definir ¿enumeraciones? para los valores de las opciones.
@@ -160,7 +163,10 @@ document.addEventListener('click', ev => {
 
     localStorage.setItem('favoritos', JSON.stringify(favoritos))
   } else if (ev.target.matches('#botonFavoritos')) {
-    modalFavoritos.classList.add('mostrar')
+    modalFavoritos.classList.add('mostrar');
+    modalFavoritos.classList.remove('ocultar');
+  } else if (ev.target.matches('#btnCerrar')) {
+    modalFavoritos.classList.add('ocultar');
   } else if (ev.target.matches('#botonInicio')) {
     sectionCategorias.innerHTML = '';
     sectionFiltrado.innerHTML = '';
@@ -171,6 +177,7 @@ document.addEventListener('click', ev => {
 
   if (repintarGaleria) pintarGaleria(categoriaActual, paginaActual);
 })
+
 
 document.addEventListener('keypress', (ev) => {
   if (ev.target.matches('#sectionPaginado input') && ev.key === 'Enter') {
@@ -337,8 +344,9 @@ const pintarGaleria = async (categoria, pagina) => {
       const buttonFavorito = document.createElement('button');
 
       article.classList.add('boxImagen', 'borderRadius10', 'fondoPrincipal')
-      divCaption.classList.add('pad25px', 'flexContainer')
+      divCaption.classList.add('pad25px', 'flexContainer','flexContainerCol')
       h3.classList.add('colorPrincipal', 'fw300', 'fontSecundaria')
+      buttonFavorito.classList.add('borderRadius10', 'fontPrincipal', 'fztxt', 'fw300', 'fondoBlanco','borderNormal')
 
       article.append(div, divCaption);
       div.append(img);
@@ -348,10 +356,10 @@ const pintarGaleria = async (categoria, pagina) => {
       h3.textContent = foto.alt;
 
       if (favoritos.includes(foto.id)) {
-        buttonFavorito.textContent = ('Quitar Favoritos');
+        buttonFavorito.textContent = ('Quitar de Favoritos');
         buttonFavorito.id = -foto.id;
       } else {
-        buttonFavorito.textContent = ('Añadir Favoritos');
+        buttonFavorito.textContent = ('Añadir a Favoritos');
         buttonFavorito.id = foto.id;
       }
 
@@ -481,13 +489,18 @@ const pintarFiltros = () => {
 const generarSelect = (id, etiqueta, valores, valorPorDefecto) => {
   const label = document.createElement('label');
   const select = document.createElement('select');
+  const div = document.createElement('div');
+
+  div.classList.add('flexContainerCol', 'g5px', 'fz09rem', 'fw300','borderNormal','p5px','fontPrincipal')
+
+  div.append(label,select);
 
   label.setAttribute('for', id);
   label.textContent = etiqueta;
   select.id = id;
   rellenarSelect(select, valores, valorPorDefecto);
 
-  fragmento.append(label, select);
+  fragmento.append(div);
 };
 
 const rellenarSelect = (select, valores, valorPorDefecto) => {

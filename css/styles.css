@@ -24,6 +24,7 @@ table {
   --color-bg-principal: #faf3f7;
   --color-separacion: #cecece;
   --color-texto: #131313;
+  --color-blanco: #ffffff;
   --color-negro-90: #191919;
   --color-negro-85: #262626;
   --color-negro-70: #4c4c4c;
@@ -68,6 +69,9 @@ button {
 .fztxt {
   font-size: 1.1rem;
 }
+.fz09rem {
+  font-size: .9rem;
+}
 .lh-titles {
   line-height: 1.1;
 }
@@ -110,6 +114,9 @@ button {
 .fondoSecundario {
   background-color: var(--color-negro-25);
 }
+.fondoBlanco {
+  background-color: var(--color-blanco);
+}
 .borderNormal {
   border: 1px solid var(--color-separacion)
 }
@@ -137,6 +144,9 @@ button {
 .p10px {
   padding: 10px;
 }
+.p5px {
+  padding: 5px;
+}
 .pb50px {
   padding-bottom: 50px;
 }
@@ -146,8 +156,14 @@ button {
 .mb40px {
   margin-bottom: 40px;
 }
+.mt20px {
+  margin-top: 20px;
+}
 .mb20px {
   margin-bottom: 20px;
+}
+.g5px {
+  gap: 5px!important;
 }
 p {
   font-family: var(--font-principal);
@@ -185,12 +201,26 @@ button img {
     1px 1px 2px dimgrey;
   background-color: rgba(0, 0, 0, 0.3);
 }
+input {
+  width: 30px;
+  border: 1px solid var(--color-negro-10);
+  border-radius: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 110%;
+}
+#sectionPaginado button {
+  padding: 5px 20px;
+  border-radius: 10px;
+  background-color: var(--color-negro-5);
+}
 
 /* ===========================================
     Arquitectura páginas
 ============================================== */
 .container {
-  width: 90%;
+  width: 95%;
   margin: 20px auto;
 }
 .modalFavoritos {
@@ -213,9 +243,15 @@ button img {
 .flexContainer {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
+}
+.flexContainerCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
 }
 
 .gridContainer {
@@ -233,6 +269,18 @@ button img {
 }
 .mostrar {
   display: block;
+}
+.ocultar {
+  display: none;
+}
+.cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 /* ===========================================
     Responsive 768
