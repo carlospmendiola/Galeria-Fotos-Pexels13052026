@@ -53,12 +53,15 @@ const sectionCategorias = document.querySelector('#sectionCategorias')
 const sectionPaginado = document.querySelector('#sectionPaginado')
 const sectionFiltrado = document.querySelector('#sectionFiltrado');
 const modalFavoritos = document.querySelector('#modalFavoritos');
+const btnCerrar = document.querySelector('#btnCerrar');
 const categorias = [
   { nombre: 'coches', idFoto: 35035526 },
   { nombre: 'animales', idFoto: 34806620 },
   { nombre: 'rascacielos', idFoto: 30657712 },
 ]
 const favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
+
+
 
 // Variables globales y valores por defecto de parámetros de búsqueda de Pexels.
 // TODO: Definir ¿enumeraciones? para los valores de las opciones.
@@ -158,11 +161,15 @@ document.addEventListener('click', ev => {
 
     localStorage.setItem('favoritos', JSON.stringify(favoritos))
   } else if (ev.target.matches('#botonFavoritos')) {
-    modalFavoritos.classList.add('mostrar')
+    modalFavoritos.classList.add('mostrar');
+    modalFavoritos.classList.remove('ocultar');
+  } else if (ev.target.matches('#btnCerrar')) {
+    modalFavoritos.classList.add('ocultar');
   }
 
   if (repintarGaleria) pintarGaleria(categoriaActual, paginaActual);
 })
+
 
 document.addEventListener('keypress', (ev) => {
   if (ev.target.matches('#sectionPaginado input') && ev.key === 'Enter') {
@@ -348,6 +355,13 @@ const pintarGaleria = async (categoria, pagina) => {
   }
 };
 
+const pintarFavoritos  = async () => {
+  try {
+
+  }
+  catch{}
+}
+ 
 const pintarPaginado = (pagina, paginasTotales) => {
   // if (pagina > 1) {
   //   const botonPaginaAnterior = document.createElement('button')

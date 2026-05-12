@@ -210,6 +210,18 @@ img {
 .mostrar {
   display: block;
 }
+.ocultar {
+  display: none;
+}
+.cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 /* ===========================================
     Responsive 768
 ============================================== */
