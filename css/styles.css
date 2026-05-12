@@ -195,7 +195,8 @@ button img {
 }
 .flexPortada button {
   height: 100%;
-  width: 25dvw;
+  width: 29dvw;
+  padding: 0;
   color: white;
   text-shadow: -1px -1px 3px dimgrey,
     1px 1px 2px dimgrey;
@@ -333,6 +334,9 @@ input {
   .container {
     width: 80%;
   }
+  .flexPortada button {
+    width: 25dvw;
+  }
   .gridContainer {
     grid-template: repeat(3, 1fr)/repeat(3, 1fr);
   }
@@ -355,6 +359,9 @@ input {
 @media screen and (min-width:1200px) {
   .container {
     width: 70%;
+  }
+  .flexPortada button {
+    width: 22dvw;
   }
   .fztitle {
     font-size: 2.2rem;
