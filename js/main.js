@@ -45,7 +45,8 @@
 const API_KEY = 'TewSBIvF8QDVsqGh0UOmnufPlk6r9JM6l2OIJs2MOoFtuvtZbQPy2t3E';
 const URL_BASE = 'https://api.pexels.com/v1'
 // Pexels limita a las API_KEY gratuítas la cantidad máxima de imágenes que deja recoger a 480.
-const PEXELS_MAX_IMAGES_API = 480;
+const PEXELS_API_GRATUITA = true;
+const PEXELS_API_GRATUITA_MAX_IMAGES = 480;
 const fragmento = document.createDocumentFragment();
 const sectionGaleria = document.querySelector('#sectionGaleria');
 const sectionCategorias = document.querySelector('#sectionCategorias')
@@ -64,6 +65,7 @@ let color = undefined;
 let idiomaConsulta = 'es-ES';
 let imagenesPorPagina = 9;
 let paginaActual = 1;
+let paginasTotales = 1;
 let categoriaActual = '';
 
 //EVENTOS
@@ -90,7 +92,7 @@ document.addEventListener('keypress', (ev) => {
   if (ev.target.matches('#sectionPaginado input') && ev.key === 'Enter') {
     const paginaIntroducida = ev.target.value.trim().replace(',', '.');
     if (paginaIntroducida === '' || isNaN(paginaIntroducida)) return;
-    const paginaSaneada = Math.max(1, Math.min(Math.floor(paginaIntroducida), Math.floor(PEXELS_MAX_IMAGES_API / imagenesPorPagina)));
+    const paginaSaneada = Math.max(1, Math.min(Math.floor(paginaIntroducida), paginasTotales));
     if (Number(ev.target.value) !== paginaSaneada)
       ev.target.value = paginaSaneada;
     else if (paginaSaneada !== paginaActual) {
@@ -143,6 +145,12 @@ const buscarFotos = async (categoria, pagina = 1) => {
     if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes de la categoría '${categoria}'`;
     if (datos.total_results === 0) throw `Error: No existen imágenes para la categoría '${categoria}'`;
 
+    /*
+      Una API key gratuíta de Pexels solo retorna un total de PEXELS_FREE_API_MAX_IMAGES imágenes pero
+      devuelve un total_results que corresponde al total de imágenes que se tendrían con un API key de pago.
+    */
+    if (PEXELS_API_GRATUITA) datos.total_results = Math.min(PEXELS_API_GRATUITA_MAX_IMAGES, datos.total_results);
+
     return datos;
   } catch (error) {
     console.log('buscarFotos:', error);
@@ -173,11 +181,8 @@ const obtenerFoto = async (id) => {
 
 const pintarGaleria = async (categoria, pagina) => {
   try {
-    const paginasLimiteApi = Math.floor(PEXELS_MAX_IMAGES_API / imagenesPorPagina);
-    pagina = Math.min(pagina, paginasLimiteApi);
-
     const datos = await buscarFotos(categoria, pagina);
-    const paginasTotales = Math.min(Math.ceil(datos.total_results / datos.per_page), paginasLimiteApi);
+    paginasTotales = Math.ceil(datos.total_results / datos.per_page);
     pintarPaginado(pagina, paginasTotales);
 
     datos.photos.forEach(foto => {
