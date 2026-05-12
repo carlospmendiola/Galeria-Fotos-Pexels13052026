@@ -585,13 +585,14 @@ const generarSelect = (id, etiqueta, valores, valorPorDefecto) => {
   const select = document.createElement('select');
   const div = document.createElement('div');
 
-  div.classList.add('flexContainerCol', 'g5px', 'fz09rem', 'fw300', 'borderNormal', 'p5px', 'fontPrincipal')
+  div.classList.add('flexContainerCol', 'g5px', 'fz09rem', 'fw300', 'borderNormal', 'borderRadius10', 'p5px', 'fontPrincipal')
 
   div.append(label, select);
 
   label.setAttribute('for', id);
   label.textContent = etiqueta;
   select.id = id;
+  select.classList.add('borderRadius10');
   rellenarSelect(select, valores, valorPorDefecto);
 
   fragmento.append(div);

@@ -59,7 +59,6 @@ button {
 select {
   font-size: 0.9rem;
   padding: 0.5rem;
-  border-radius: 10px;
 }
 .txtCapitalize {
   text-transform: capitalize;
@@ -268,7 +267,6 @@ input {
   flex-direction: column;
   align-items: flex-start;
   gap: 25px;
-  border-radius: 10px;
 }
 
 /* .gridContainer {
