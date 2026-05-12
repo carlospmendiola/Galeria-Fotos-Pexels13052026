@@ -53,6 +53,7 @@ const sectionCategorias = document.querySelector('#sectionCategorias')
 const sectionPaginado = document.querySelector('#sectionPaginado')
 const sectionFiltrado = document.querySelector('#sectionFiltrado');
 const modalFavoritos = document.querySelector('#modalFavoritos');
+const galeriaFavoritos = document.querySelector('#galeriaFavoritos');
 const btnCerrar = document.querySelector('#btnCerrar');
 const categorias = [
   { nombre: 'coches', idFoto: 35035526 },
@@ -154,18 +155,23 @@ document.addEventListener('click', ev => {
     if (idSaneado >= 0) {
       favoritos.push(Number(ev.target.id))
       ev.target.textContent = ('Quitar Favoritos');
-      ev.target.id = -idSaneado;
     } else {
       favoritos.splice(favoritos.indexOf(idSaneado), 1)
       ev.target.textContent = ('Añadir Favoritos');
-      ev.target.id = -idSaneado;
     }
+    ev.target.id = -idSaneado;
 
-    localStorage.setItem('favoritos', JSON.stringify(favoritos))
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+  } else if (ev.target.matches('#galeriaFavoritos button')) {
+    favoritos.splice(favoritos.indexOf(ev.target.dataset.id), 1);
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+    ev.target.closest('#galeriaFavoritos>article').outerHTML = '';
   } else if (ev.target.matches('#botonFavoritos')) {
     modalFavoritos.classList.add('mostrar');
+    pintarGaleriaFavoritos();
   } else if (ev.target.matches('#btnCerrar')) {
     modalFavoritos.classList.remove('mostrar');
+    galeriaFavoritos.innerHTML = '';
   } else if (ev.target.matches('#botonInicio')) {
     sectionCategorias.innerHTML = '';
     sectionFiltrado.innerHTML = '';
@@ -344,9 +350,9 @@ const pintarGaleria = async (categoria, pagina) => {
       const buttonFavorito = document.createElement('button');
 
       article.classList.add('boxImagen', 'borderRadius10', 'fondoPrincipal')
-      divCaption.classList.add('pad25px', 'flexContainer','flexContainerCol')
+      divCaption.classList.add('pad25px', 'flexContainer', 'flexContainerCol')
       h3.classList.add('colorPrincipal', 'fw300', 'fontSecundaria')
-      buttonFavorito.classList.add('borderRadius10', 'fontPrincipal', 'fztxt', 'fw300', 'fondoBlanco','borderNormal')
+      buttonFavorito.classList.add('borderRadius10', 'fontPrincipal', 'fztxt', 'fw300', 'fondoBlanco', 'borderNormal')
 
       article.append(div, divCaption);
       div.append(img);
@@ -382,6 +388,42 @@ const pintarGaleria = async (categoria, pagina) => {
 
 
 
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const pintarGaleriaFavoritos = async () => {
+  try {
+    const fotosFavoritas = await obtenerFotos(favoritos);
+    console.log(fotosFavoritas);
+    fotosFavoritas.forEach(fotoFavorita => {
+      const article = document.createElement('article');
+      const div = document.createElement('div');
+      const img = document.createElement('img');
+      const divCaption = document.createElement('div');
+      const h3 = document.createElement('h3');
+      const buttonFavorito = document.createElement('button');
+
+      article.classList.add('boxImagen', 'borderRadius10', 'fondoPrincipal')
+      divCaption.classList.add('pad25px', 'flexContainer', 'flexContainerCol')
+      h3.classList.add('colorPrincipal', 'fw300', 'fontSecundaria')
+      buttonFavorito.classList.add('borderRadius10', 'fontPrincipal', 'fztxt', 'fw300', 'fondoBlanco', 'borderNormal')
+
+      article.append(div, divCaption);
+      div.append(img);
+      img.src = fotoFavorita.src['landscape'];
+      img.alt = fotoFavorita.alt;
+      divCaption.append(h3, buttonFavorito);
+      h3.textContent = fotoFavorita.alt;
+
+      buttonFavorito.textContent = ('Quitar de Favoritos');
+      buttonFavorito.dataset.id = fotoFavorita.id;
+
+      fragmento.append(article);
+    });
+
+    galeriaFavoritos.replaceChildren(fragmento);
   } catch (error) {
     console.log(error);
   }
@@ -491,9 +533,9 @@ const generarSelect = (id, etiqueta, valores, valorPorDefecto) => {
   const select = document.createElement('select');
   const div = document.createElement('div');
 
-  div.classList.add('flexContainerCol', 'g5px', 'fz09rem', 'fw300','borderNormal','p5px','fontPrincipal')
+  div.classList.add('flexContainerCol', 'g5px', 'fz09rem', 'fw300', 'borderNormal', 'p5px', 'fontPrincipal')
 
-  div.append(label,select);
+  div.append(label, select);
 
   label.setAttribute('for', id);
   label.textContent = etiqueta;
