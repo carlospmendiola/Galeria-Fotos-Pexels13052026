@@ -186,6 +186,8 @@ document.addEventListener('click', ev => {
     categoriaActual = '';
     sectionBusqueda.classList.remove('mostrar');
     pintarCategorias(categorias);
+  } else if (ev.target.matches('#sectionBusqueda label')) {
+    ejecutarBusqueda(inputBusqueda);
   }
 
   if (repintarGaleria) pintarGaleria(categoriaActual, paginaActual);
@@ -203,14 +205,15 @@ document.addEventListener('keypress', (ev) => {
       pintarGaleria(categoriaActual, paginaActual);
     }
   } else if (ev.target.matches('#sectionBusqueda input') && ev.key === 'Enter') {
-    const textoBusquedaSaneado = ev.target.value.replace(/[^\p{L}\p{N}\s]/gu, '').replace(/\s+/g, ' ').trim();
+    // const textoBusquedaSaneado = ev.target.value.replace(/[^\p{L}\p{N}\s]/gu, '').replace(/\s+/g, ' ').trim();
 
-    if (ev.target.value !== textoBusquedaSaneado)
-      ev.target.value = textoBusquedaSaneado;
-    else {
-      busqueda = textoBusquedaSaneado;
-      pintarGaleria(categoriaActual, paginaActual);
-    }
+    // if (ev.target.value !== textoBusquedaSaneado)
+    //   ev.target.value = textoBusquedaSaneado;
+    // else {
+    //   busqueda = textoBusquedaSaneado;
+    //   pintarGaleria(categoriaActual, paginaActual);
+
+    ejecutarBusqueda(ev.target);
   }
 });
 
@@ -236,6 +239,26 @@ document.addEventListener('change', (ev) => {
     pintarGaleria(categoriaActual, paginaActual);
   }
 });
+
+const ejecutarBusqueda = (cuadroBusqueda) => {
+  const textoBusquedaSaneado = cuadroBusqueda.value.replace(/[^\p{L}\p{N}\s]/gu, '').replace(/\s+/g, ' ').trim();
+
+  if (cuadroBusqueda.value !== textoBusquedaSaneado)
+    cuadroBusqueda.value = textoBusquedaSaneado;
+  else {
+    busqueda = textoBusquedaSaneado;
+    pintarGaleria(categoriaActual, paginaActual);
+  }
+
+  /*
+    Cuando se cambia el value de un input desde otro elemento, se selcciona el texto.
+    Para quitar la selección se hace que el inicio de la selección sea igual que el final,
+    pero, no funciona aparentemente, el problema es que se hace antes de haberse producido
+    la selcción, metiendolo dentro de una función de setTimeout incluso con 0 milisegundos
+    provoca que se haga la selección y luego se quite.
+  */
+  setTimeout(function () { cuadroBusqueda.selectionStart = cuadroBusqueda.selectionEnd; }, 0);
+};
 
 /**
  * Petición a Pexels
