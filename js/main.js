@@ -246,7 +246,7 @@ const buscarFotos = async (categoria, pagina = 1) => {
  * @param {number} id
  * @returns {Promise<PexelsPhoto>}
  */
-const obtenerFoto = async (id) => {
+const obtenerFoto = async id => {
   try {
     if (!id && typeof id !== 'number') throw 'Error: No se ha pasado un id válido.';
 
