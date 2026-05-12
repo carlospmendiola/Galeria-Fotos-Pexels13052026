@@ -148,8 +148,11 @@ const buscarFotos = async (categoria, pagina = 1) => {
     /*
       Una API key gratuíta de Pexels solo retorna un total de PEXELS_FREE_API_MAX_IMAGES imágenes pero
       devuelve un total_results que corresponde al total de imágenes que se tendrían con un API key de pago.
+      A su vez el límite de 480 hay que controlar si la primera foto de la última página es menos de 480 y
+      la última es mayor porque pexels no devuelve justo los elementos que queda. Para esto último hacemos
+      el cálculo de cuantas páginas completas hay con las imagenesPorPagina actual.
     */
-    if (PEXELS_API_GRATUITA) datos.total_results = Math.min(PEXELS_API_GRATUITA_MAX_IMAGES, datos.total_results);
+    if (PEXELS_API_GRATUITA) datos.total_results = Math.min(imagenesPorPagina * Math.floor(PEXELS_API_GRATUITA_MAX_IMAGES / imagenesPorPagina), datos.total_results);
 
     return datos;
   } catch (error) {
