@@ -59,9 +59,36 @@ const categorias = [
 
 // Variables globales y valores por defecto de parámetros de búsqueda de Pexels.
 // TODO: Definir ¿enumeraciones? para los valores de las opciones.
+const orientacionValores = [
+  [null, 'todas'],
+  ['landscape', 'apaisado'],
+  ['portrait', 'retrato'],
+  ['square', 'cuadrado']
+];
 let orientacion = 'landscape';
+const tamanioValores = [
+  [null, 'todos'],
+  ['large', 'grande'],
+  ['medium', 'mediana'],
+  ['small', 'pequeña']
+];
 let tamanio = 'small';
-let color = undefined;
+const tamanioValores = [
+  [null, 'cualquiera'],
+  ['red', 'rojo'],
+  ['orange', 'naranja'],
+  ['yellow', 'amarillo'],
+  ['green', 'verde'],
+  ['turquoise', 'turquesa'],
+  ['blue', 'azul'],
+  ['violet', 'violeta'],
+  ['pink', 'rosa'],
+  ['brown', 'marrón'],
+  ['black', 'negro'],
+  ['gray', 'gris'],
+  ['white', 'blanco']
+];
+let color = 'white';
 let idiomaConsulta = 'es-ES';
 let imagenesPorPagina = 9;
 let paginaActual = 1;
