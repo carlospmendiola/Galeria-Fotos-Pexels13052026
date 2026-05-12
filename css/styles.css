@@ -235,7 +235,8 @@ input {
   width: 100%;
   height: 100vh;
   background: #131313cb;
-  position: absolute;
+  position: fixed;
+  overflow: scroll;
   top: 0;
   left:0;
   z-index: 10;
@@ -284,9 +285,10 @@ input {
   top: 1rem;
   right: 1rem;
   font-size: 1.5rem;
-  background: none;
+  background: white;
   border: none;
   cursor: pointer;
+  border-radius: 1000px;
 }
 
 .gridContainer {
