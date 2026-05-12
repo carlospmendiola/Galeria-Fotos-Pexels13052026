@@ -132,10 +132,12 @@ let categoriaActual = '';
 document.addEventListener('click', ev => {
   let repintarGaleria = false;
 
-  if (ev.target.matches('#sectionCategorias button')) {
-    if (categoriaActual !== ev.target.textContent) {
+  if (ev.target.matches('#sectionCategorias button') || ev.target.matches('#sectionCategorias button *')) {
+    const botonCategoria = ev.target.closest('button');
+    if (categoriaActual !== botonCategoria.textContent) {
+      ev.target.closest('ul').classList.remove('flexPortada');
       pintarFiltros();
-      categoriaActual = ev.target.textContent;
+      categoriaActual = botonCategoria.textContent;
       paginaActual = 1;
       repintarGaleria = true;
     }
@@ -159,6 +161,12 @@ document.addEventListener('click', ev => {
     localStorage.setItem('favoritos', JSON.stringify(favoritos))
   } else if (ev.target.matches('#botonFavoritos')) {
     modalFavoritos.classList.add('mostrar')
+  } else if (ev.target.matches('#botonInicio')) {
+    sectionCategorias.innerHTML = '';
+    sectionFiltrado.innerHTML = '';
+    sectionGaleria.innerHTML = '';
+    sectionPaginado.innerHTML = '';
+    pintarCategorias(categorias);
   }
 
   if (repintarGaleria) pintarGaleria(categoriaActual, paginaActual);
@@ -256,6 +264,29 @@ const buscarFotos = async (categoria, pagina = 1) => {
     return datos;
   } catch (error) {
     console.log('buscarFotos:', error);
+  }
+};
+
+const obtenerFotoAleatoria = async (categoria) => {
+  try {
+    const respuesta = await peticionPexels(`search?query=${categoria}&per_page=1`);
+    if (!respuesta.ok) throw respuesta.status;
+
+    const datos = await respuesta.json();
+    if (typeof datos.total_results === 'undefined') throw `Error: Recibiendo las imágenes de la categoría '${categoria}'`;
+    if (datos.total_results === 0) throw `Error: No existen imágenes para la categoría '${categoria}'`;
+
+    const paginaAleatoria = Math.floor(Math.random() * Math.min(datos.total_results, PEXELS_API_GRATUITA_MAX_IMAGES)) + 1;
+    const respuesta2 = await peticionPexels(`search?query=${categoria}&per_page=1&page=${paginaAleatoria}`);
+    if (!respuesta2.ok) throw respuesta2.status;
+
+    const datos2 = await respuesta2.json();
+    if (typeof datos2.total_results === 'undefined') throw `Error: Recibiendo las imágenes de la categoría '${categoria}'`;
+    if (datos2.total_results === 0) throw `Error: No existen imágenes para la categoría '${categoria}'`;
+
+    return datos2.photos[0];
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -410,21 +441,32 @@ const pintarPaginado = (pagina, paginasTotales) => {
   sectionPaginado.replaceChildren(fragmento)
 }
 
-const pintarCategorias = (categorias) => {
-  const ul = document.createElement('ul')
+const ponerImagenAleatoriaEnCategoria = async (categoria, elementoHTML) => {
+  const imgCategoria = await obtenerFotoAleatoria(categoria);
 
-  categorias.forEach((categoria) => {
-    const li = document.createElement('li')
-    const button = document.createElement('button')
-    button.textContent = categoria.nombre
-    button.classList.add('borderRadius10', 'txtCapitalize', 'fontPrincipal', 'fztxt', 'fw300', 'txtMayusculas')
+  elementoHTML.src = imgCategoria.src.portrait;
+  elementoHTML.alt = imgCategoria.alt;
+};
 
-    li.append(button)
-    ul.append(li)
-  })
-  ul.classList.add('flexContainer')
-  sectionCategorias.replaceChildren(ul)
+const pintarCategorias = categorias => {
+  const ul = document.createElement('ul');
 
+  for (const categoria of categorias) {
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    const img = document.createElement('img');
+
+    button.textContent = categoria.nombre;
+    button.classList.add('borderRadius10', 'txtCapitalize', 'fontPrincipal', 'fztxt', 'fw300', 'txtMayusculas');
+    ponerImagenAleatoriaEnCategoria(categoria.nombre, img);
+
+    button.append(img);
+    li.append(button);
+    ul.append(li);
+  };
+
+  ul.classList.add('flexPortada', 'flexContainer');
+  sectionCategorias.replaceChildren(ul);
 }
 
 const pintarFiltros = () => {
