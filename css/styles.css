@@ -1,0 +1,372 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ===========================================
+    Variables
+============================================== */
+:root {
+  --color-principal: #206649;
+  --color-secundario: #7c7b0b;
+  --color-bg-principal: #faf3f7;
+  --color-separacion: #cecece;
+  --color-texto: #131313;
+  --color-blanco: #ffffff;
+  --color-negro-90: #191919;
+  --color-negro-85: #262626;
+  --color-negro-70: #4c4c4c;
+  --color-negro-55: #737373;
+  --color-negro-40: #999;
+  --color-negro-25: #bfbfbf;
+  --color-negro-10: #e5e5e5;
+  --color-negro-5: #f2f2f2;
+  --font-principal: "Oswald", sans-serif;
+  --font-secundaria: "Georgia", serif;
+}
+/* ===========================================
+    Formato textos
+============================================== */
+h2 {
+  font: 400 1.6rem/1.1 var(--font-secundaria);
+}
+
+p {
+  font-size: 1.1rem;
+}
+.fontPrincipal {
+  font-family: var(--font-principal);
+}
+.fontSecundaria {
+  font-family: var(--font-secundaria);
+}
+button {
+  padding: 10px 25px;
+  cursor: pointer;
+
+}
+.txtCapitalize {
+  text-transform: capitalize;
+}
+.fztitle {
+  font-size: 1.6rem;
+}
+.fzsubtitle {
+  font-size: 1.4rem;
+}
+.fztxt {
+  font-size: 1.1rem;
+}
+.fz09rem {
+  font-size: .9rem;
+}
+.lh-titles {
+  line-height: 1.1;
+}
+
+.lh-texto {
+  line-height: 1.4;
+}
+.fw300 {
+  font-weight: 300;
+}
+.fw400 {
+  font-weight: 400;
+}
+.fw600 {
+  font-weight: 600;
+}
+.fw800 {
+  font-weight: 800;
+}
+.txtMayusculas {
+  text-transform: uppercase;
+}
+/* ===========================================
+    Formato
+============================================ */
+
+.center {
+  text-align: center;
+}
+.mayusculas {
+  text-transform: uppercase;
+}
+
+.colorPrincipal {
+  color: var(--color-principal);
+}
+.fondoPrincipal {
+  background-color: var(--color-negro-5);
+}
+.fondoSecundario {
+  background-color: var(--color-negro-25);
+}
+.fondoBlanco {
+  background-color: var(--color-blanco);
+}
+.borderNormal {
+  border: 1px solid var(--color-separacion)
+}
+.borderTop1px {
+  border-top: 1px solid var(--color-separacion)
+}
+.borderBottom1px {
+  border-bottom: 1px solid var(--color-separacion)
+}
+.borderRadius10 {
+  border-radius: 10px;
+}
+.pad25px {
+  padding: 25px;
+}
+.pad50px {
+  padding: 50px;
+}
+.pad20px0 {
+  padding: 20px 0;
+}
+.pb20px {
+  padding-bottom: 20px;
+}
+.p10px {
+  padding: 10px;
+}
+.p5px {
+  padding: 5px;
+}
+.pb50px {
+  padding-bottom: 50px;
+}
+.mt40px {
+  margin-top: 40px;
+}
+.mb40px {
+  margin-bottom: 40px;
+}
+.mt20px {
+  margin-top: 20px;
+}
+.mb20px {
+  margin-bottom: 20px;
+}
+.g5px {
+  gap: 5px!important;
+}
+p {
+  font-family: var(--font-principal);
+}
+p span{
+  font-weight: 800;
+}
+p a {
+  text-decoration: none;
+  color: var(--color-principal)
+}
+img {
+  width: 100%;
+}
+button img {
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+.flexPortada {
+  height: 33dvw;
+  width: 100%;
+}
+#sectionCategorias button {
+  position: relative;
+  overflow: hidden;
+}
+.flexPortada button {
+  height: 100%;
+  width: 29dvw;
+  padding: 0;
+  color: white;
+  text-shadow: -1px -1px 3px dimgrey,
+    1px 1px 2px dimgrey;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+input {
+  width: 30px;
+  border: 1px solid var(--color-negro-10);
+  border-radius: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 110%;
+}
+#sectionPaginado button {
+  padding: 5px 20px;
+  border-radius: 10px;
+  background-color: var(--color-negro-5);
+}
+.sectionBusqueda{
+  display: none;
+}
+#inputBusqueda {
+  width: 80%;
+  text-align: left;
+}
+
+/* ===========================================
+    Arquitectura páginas
+============================================== */
+.container {
+  width: 95%;
+  margin: 20px auto;
+}
+.modalFavoritos {
+  width: 100%;
+  height: 100vh;
+  background: #131313cb;
+  position: absolute;
+  top: 0;
+  left:0;
+  z-index: 10;
+  display: none;
+}
+.containerFavoritos {
+  width: 80%;
+  min-height: 30px;
+  margin: 25px auto;
+  background-color: var(--color-bg-principal);
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+.flexContainerCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+/* .gridContainer {
+  display: grid;
+  grid-template: repeat(1, 1fr)/repeat(1, 1fr);
+  gap: 25px;
+} */
+
+
+.boxImagen {
+  overflow: hidden;
+}
+
+.boxTxt h3 {
+  font:400 1.1rem/1.2 var(--font-principal);
+}
+.mostrar {
+  display: block;
+}
+.cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.gridContainer {
+  columns: 1 350px;
+  column-gap: 16px;
+}
+.gridContainer article {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gridContainer article img {
+  width: 100%;
+  display: block;
+}
+/* ===========================================
+    Responsive 768
+============================================== */
+@media screen and (min-width:768px) {
+  .gridContainer {
+      columns: 2 350px;
+      column-gap: 16px;
+    }
+  /* .gridContainer {
+      grid-template: repeat(2, 1fr)/repeat(2, 1fr);
+    } */
+  #sectionCategorias .flexContainer {
+    justify-content: center;
+    gap: 15px;
+  }
+  .fztitle {
+    font-size: 1.8rem;
+  }
+
+}
+
+/*cierra 768*/
+
+/* ===========================================
+    Responsive 990
+============================================== */
+@media screen and (min-width:990px) {
+  .container {
+    width: 80%;
+  }
+  .flexPortada button {
+    width: 25dvw;
+  }
+  .gridContainer {
+    grid-template: repeat(3, 1fr)/repeat(3, 1fr);
+  }
+  .fztitle {
+    font-size: 2rem;
+  }
+    .gridContainer {
+      columns: 3 200px;
+      column-gap: 16px;
+    }
+
+}
+
+/*cierra 990*/
+
+
+/* ===========================================
+    Responsive 1200
+============================================== */
+@media screen and (min-width:1200px) {
+  .container {
+    width: 70%;
+  }
+  .flexPortada button {
+    width: 22dvw;
+  }
+  .fztitle {
+    font-size: 2.2rem;
+  }
+
+}
+
+/*cierra 1200*/
