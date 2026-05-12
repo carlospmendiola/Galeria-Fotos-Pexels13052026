@@ -267,8 +267,7 @@ const obtenerFotos = async ids => {
   try {
     const fotos = await Promise.all(ids.map(id => obtenerFoto(id)));
 
-    console.log(fotos);
-
+    return fotos;
   } catch (error) {
     console.log(error);
   }
