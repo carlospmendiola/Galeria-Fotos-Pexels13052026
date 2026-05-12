@@ -24,6 +24,7 @@ table {
   --color-bg-principal: #faf3f7;
   --color-separacion: #cecece;
   --color-texto: #131313;
+  --color-blanco: #ffffff;
   --color-negro-90: #191919;
   --color-negro-85: #262626;
   --color-negro-70: #4c4c4c;
@@ -109,6 +110,9 @@ button {
 .fondoSecundario {
   background-color: var(--color-negro-25);
 }
+.fondoBlanco {
+  background-color: var(--color-blanco);
+}
 .borderNormal {
   border: 1px solid var(--color-separacion)
 }
@@ -192,6 +196,11 @@ img {
   flex-wrap: nowrap;
   justify-content: center;
   gap: 15px;
+}
+.flexContainerCol {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
 }
 
 .gridContainer {

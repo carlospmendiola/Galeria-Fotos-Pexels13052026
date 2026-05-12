@@ -313,8 +313,9 @@ const pintarGaleria = async (categoria, pagina) => {
       const buttonFavorito = document.createElement('button');
 
       article.classList.add('boxImagen', 'borderRadius10', 'fondoPrincipal')
-      divCaption.classList.add('pad25px', 'flexContainer')
+      divCaption.classList.add('pad25px', 'flexContainer','flexContainerCol')
       h3.classList.add('colorPrincipal', 'fw300', 'fontSecundaria')
+      buttonFavorito.classList.add('borderRadius10', 'fontPrincipal', 'fztxt', 'fw300', 'fondoBlanco','borderNormal')
 
       article.append(div, divCaption);
       div.append(img);
@@ -324,10 +325,10 @@ const pintarGaleria = async (categoria, pagina) => {
       h3.textContent = foto.alt;
 
       if (favoritos.includes(foto.id)) {
-        buttonFavorito.textContent = ('Quitar Favoritos');
+        buttonFavorito.textContent = ('Quitar de Favoritos');
         buttonFavorito.id = -foto.id;
       } else {
-        buttonFavorito.textContent = ('Añadir Favoritos');
+        buttonFavorito.textContent = ('Añadir a Favoritos');
         buttonFavorito.id = foto.id;
       }
 
@@ -354,13 +355,6 @@ const pintarGaleria = async (categoria, pagina) => {
     console.log(error);
   }
 };
-
-const pintarFavoritos  = async () => {
-  try {
-
-  }
-  catch{}
-}
  
 const pintarPaginado = (pagina, paginasTotales) => {
   // if (pagina > 1) {
@@ -453,13 +447,16 @@ const pintarFiltros = () => {
 const generarSelect = (id, etiqueta, valores, valorPorDefecto) => {
   const label = document.createElement('label');
   const select = document.createElement('select');
+  const div = document.createElement('div');
+
+  div.append(label,select);
 
   label.setAttribute('for', id);
   label.textContent = etiqueta;
   select.id = id;
   rellenarSelect(select, valores, valorPorDefecto);
 
-  fragmento.append(label, select);
+  fragmento.append(div);
 };
 
 const rellenarSelect = (select, valores, valorPorDefecto) => {
