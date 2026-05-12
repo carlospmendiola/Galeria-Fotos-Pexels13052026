@@ -396,31 +396,33 @@ const pintarCategorias = (categorias) => {
 }
 
 const pintarFiltros = () => {
-  generarSelect('filtroOrientacion', 'Orientación: ', orientacionValores);
-  generarSelect('filtroTamanio', 'Tamaño: ', tamanioValores);
-  generarSelect('filtroColor', 'Color: ', colorValores);
-  generarSelect('filtroIdioma', 'Idioma: ', idiomaValores);
+  generarSelect('filtroOrientacion', 'Orientación: ', orientacionValores, orientacion);
+  generarSelect('filtroTamanio', 'Tamaño: ', tamanioValores, tamanio);
+  generarSelect('filtroColor', 'Color: ', colorValores, color);
+  generarSelect('filtroIdioma', 'Idioma: ', idiomaValores, idioma);
 
   sectionFiltrado.replaceChildren(fragmento);
 };
 
-const generarSelect = (id, etiqueta, valores) => {
+const generarSelect = (id, etiqueta, valores, valorPorDefecto) => {
   const label = document.createElement('label');
   const select = document.createElement('select');
 
   label.setAttribute('for', id);
   label.textContent = etiqueta;
   select.id = id;
-  rellenarSelect(select, valores);
+  rellenarSelect(select, valores, valorPorDefecto);
 
   fragmento.append(label, select);
 };
 
-const rellenarSelect = (select, valores) => {
+const rellenarSelect = (select, valores, valorPorDefecto) => {
   valores.forEach(valor => {
     const optionElement = document.createElement('option');
     optionElement.value = valor[0];
     optionElement.textContent = valor[1];
+    if (valor[0] === valorPorDefecto)
+      optionElement.selected = true;
     select.append(optionElement);
   });
 };
