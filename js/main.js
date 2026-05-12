@@ -53,6 +53,7 @@ const sectionCategorias = document.querySelector('#sectionCategorias')
 const sectionPaginado = document.querySelector('#sectionPaginado')
 const sectionFiltrado = document.querySelector('#sectionFiltrado');
 const sectionBusqueda = document.querySelector('#sectionBusqueda');
+const inputBusqueda = document.querySelector('#inputBusqueda');
 const modalFavoritos = document.querySelector('#modalFavoritos');
 const galeriaFavoritos = document.querySelector('#galeriaFavoritos');
 const btnCerrar = document.querySelector('#btnCerrar');
@@ -143,6 +144,8 @@ document.addEventListener('click', ev => {
     if (categoriaActual !== botonCategoria.textContent) {
       ev.target.closest('ul').classList.remove('flexPortada');
       sectionBusqueda.classList.add('mostrar');
+      busqueda = '';
+      inputBusqueda.value = '';
       pintarFiltros();
       categoriaActual = botonCategoria.textContent;
       paginaActual = 1;
@@ -263,7 +266,7 @@ const buscarFotos = async (categoria, pagina = 1) => {
     if (!categoria) throw 'No se especificó categoria para buscar imágenes.';
 
     let queryText = categoria;
-    if (busqueda) queryText += ' ' + busqueda;
+    if (busqueda) queryText += `' ${busqueda}`;
 
     const parametrosDeBusqueda = new URLSearchParams({ query: queryText });
     if (orientacion) parametrosDeBusqueda.append('orientation', orientacion);
