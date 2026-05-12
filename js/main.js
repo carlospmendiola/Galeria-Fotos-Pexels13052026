@@ -157,21 +157,28 @@ document.addEventListener('click', ev => {
       repintarGaleria = true;
     }
   } else if (ev.target.matches('#sectionGaleria button')) {
-    const idSaneado = Number(ev.target.id)
-    if (idSaneado >= 0) {
-      favoritos.push(Number(ev.target.id))
-      ev.target.textContent = ('Quitar Favoritos');
-    } else {
-      favoritos.splice(favoritos.indexOf(idSaneado), 1)
-      ev.target.textContent = ('Añadir Favoritos');
+    switch (ev.target.dataset.accion) {
+      case 'aniadir':
+        favoritos.push(Number(ev.target.dataset.id))
+        ev.target.textContent = ('Quitar Favoritos');
+        ev.target.dataset.accion = 'quitar';
+        break;
+      case 'quitar':
+        favoritos.splice(favoritos.indexOf(ev.target.dataset.id), 1)
+        ev.target.textContent = ('Añadir Favoritos');
+        ev.target.dataset.accion = 'aniadir';
+        break;
     }
-    ev.target.id = -idSaneado;
-
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
   } else if (ev.target.matches('#galeriaFavoritos button')) {
     favoritos.splice(favoritos.indexOf(ev.target.dataset.id), 1);
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
     ev.target.closest('#galeriaFavoritos>article').outerHTML = '';
+    const botonEnGaleriaPrincipal = document.querySelector(`#b${ev.target.dataset.id}`);
+    if (botonEnGaleriaPrincipal) {
+      botonEnGaleriaPrincipal.textContent = 'Añadir Favoritos';
+      botonEnGaleriaPrincipal.dataset.accion = 'aniadir';
+    }
   } else if (ev.target.matches('#botonFavoritos')) {
     modalFavoritos.classList.add('mostrar');
     pintarGaleriaFavoritos();
@@ -404,11 +411,13 @@ const pintarGaleria = async (categoria, pagina) => {
 
       if (favoritos.includes(foto.id)) {
         buttonFavorito.textContent = ('Quitar de Favoritos');
-        buttonFavorito.id = -foto.id;
+        buttonFavorito.dataset.accion = 'quitar';
       } else {
         buttonFavorito.textContent = ('Añadir a Favoritos');
-        buttonFavorito.id = foto.id;
+        buttonFavorito.dataset.accion = 'aniadir';
       }
+      buttonFavorito.id = `b${foto.id}`;
+      buttonFavorito.dataset.id = foto.id;
 
       fragmento.append(article);
 
