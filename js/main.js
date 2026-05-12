@@ -151,7 +151,7 @@ document.addEventListener('click', ev => {
       ev.target.textContent = ('Quitar Favoritos');
       ev.target.id = -idSaneado;
     } else {
-      favoritos.splice(favoritos.indexOf(idSaneado),1)
+      favoritos.splice(favoritos.indexOf(idSaneado), 1)
       ev.target.textContent = ('Añadir Favoritos');
       ev.target.id = -idSaneado;
     }
