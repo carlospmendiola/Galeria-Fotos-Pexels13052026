@@ -65,15 +65,15 @@ const orientacionValores = [
   ['portrait', 'retrato'],
   ['square', 'cuadrado']
 ];
-let orientacion = 'landscape';
+let orientacion = null;
 const tamanioValores = [
   [null, 'todos'],
   ['large', 'grande'],
   ['medium', 'mediana'],
   ['small', 'pequeña']
 ];
-let tamanio = 'small';
-const tamanioValores = [
+let tamanio = null;
+const colorValores = [
   [null, 'cualquiera'],
   ['red', 'rojo'],
   ['orange', 'naranja'],
@@ -88,8 +88,38 @@ const tamanioValores = [
   ['gray', 'gris'],
   ['white', 'blanco']
 ];
-let color = 'white';
-let idiomaConsulta = 'es-ES';
+let color = null;
+const idiomaValores = [
+  ['es-ES', 'español'],
+  ['ca-ES', 'catalán'],
+  ['en-US', 'inglés (EEUU)'],
+  ['pt-BR', 'portugués brasileño'],
+  ['de-DE', 'alemán'],
+  ['it-IT', 'italiano'],
+  ['fr-FR', 'francés'],
+  ['sv-SE', 'sueco'],
+  ['id-ID', 'indonesio'],
+  ['pl-PL', 'polaco'],
+  ['ja-JP', 'japonés'],
+  ['zh-TW', 'taiwanes'],
+  ['zh-CN', 'chino'],
+  ['ko-KR', 'koreano'],
+  ['th-TH', 'tailandés'],
+  ['nl-NL', 'holandés'],
+  ['hu-HU', 'húngaro'],
+  ['vi-VN', 'vietnamita'],
+  ['cs-CZ', 'checo'],
+  ['da-DK', 'danés'],
+  ['fi-FI', 'finlandés'],
+  ['uk-UA', 'ucraniano'],
+  ['el-GR', 'griego'],
+  ['ro-RO', 'rumano'],
+  ['nb-NO', 'noruego bokmål'],
+  ['sk-SK', 'eslovaco'],
+  ['tr-TR', 'turco'],
+  ['ru-RU', 'ruso']
+];
+let idioma = 'es-ES';
 let imagenesPorPagina = 9;
 let paginaActual = 1;
 let paginasTotales = 1;
@@ -161,7 +191,7 @@ const buscarFotos = async (categoria, pagina = 1) => {
     if (orientacion) parametrosDeBusqueda.append('orientation', orientacion);
     if (tamanio) parametrosDeBusqueda.append('size', tamanio);
     if (color) parametrosDeBusqueda.append('color', color);
-    if (idiomaConsulta) parametrosDeBusqueda.append('locale', idiomaConsulta);
+    if (idioma) parametrosDeBusqueda.append('locale', idioma);
     parametrosDeBusqueda.append('page', pagina);
     if (imagenesPorPagina) parametrosDeBusqueda.append('per_page', imagenesPorPagina);
 
