@@ -160,6 +160,29 @@ document.addEventListener('keypress', (ev) => {
   }
 });
 
+document.addEventListener('change', (ev) => {
+  if (ev.target.matches('#sectionFiltrado select')) {
+    const valorSaneado = ev.target.value !== 'null' ? ev.target.value : null;
+
+    switch (ev.target.id) {
+      case 'filtroOrientacion':
+        orientacion = valorSaneado;
+        break;
+      case 'filtroTamanio':
+        tamanio = valorSaneado;
+        break;
+      case 'filtroColor':
+        color = valorSaneado;
+        break;
+      case 'filtroIdioma':
+        idioma = valorSaneado;
+        break;
+    }
+
+    pintarGaleria(categoriaActual, paginaActual);
+  }
+});
+
 /**
  * Petición a Pexels
  * @param {*} accion Acción a solicitar al API de Pexels.
