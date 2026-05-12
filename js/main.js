@@ -132,6 +132,7 @@ document.addEventListener('click', ev => {
 
   if (ev.target.matches('#sectionCategorias button')) {
     if (categoriaActual !== ev.target.textContent) {
+      pintarFiltros();
       categoriaActual = ev.target.textContent;
       paginaActual = 1;
       repintarGaleria = true;
@@ -278,8 +279,6 @@ const pintarGaleria = async (categoria, pagina) => {
     const datos = await buscarFotos(categoria, pagina);
     paginasTotales = Math.ceil(datos.total_results / datos.per_page);
     pintarPaginado(pagina, paginasTotales);
-
-    pintarFiltros();
 
     datos.photos.forEach(foto => {
       const article = document.createElement('article');
