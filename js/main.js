@@ -601,7 +601,7 @@ const rellenarSelect = (select, valores, valorPorDefecto) => {
   valores.forEach(valor => {
     const optionElement = document.createElement('option');
     optionElement.value = valor[0];
-    optionElement.textContent = valor[1];
+    optionElement.textContent = valor[1].charAt(0).toUpperCase() + valor[1].slice(1);;
     if (valor[0] === valorPorDefecto)
       optionElement.selected = true;
     select.append(optionElement);

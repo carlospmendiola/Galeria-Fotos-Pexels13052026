@@ -56,6 +56,10 @@ button {
   padding: 10px 25px;
   cursor: pointer;
 }
+select {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
 .txtCapitalize {
   text-transform: capitalize;
 }
