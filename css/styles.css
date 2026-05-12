@@ -32,8 +32,8 @@ table {
   --color-negro-25: #bfbfbf;
   --color-negro-10: #e5e5e5;
   --color-negro-5: #f2f2f2;
-  --font-principal: "Inter", sans-serif;
-  --font-secundaria: "Old Standard TT", serif;
+  --font-principal: "Oswald", sans-serif;
+  --font-secundaria: "Georgia", serif;
 }
 /* ===========================================
     Formato textos
@@ -52,20 +52,20 @@ p {
   font-family: var(--font-secundaria);
 }
 button {
-  padding: 15px 35px;
+  padding: 10px 25px;
   cursor: pointer;
 }
 .txtCapitalize {
   text-transform: capitalize;
 }
 .fztitle {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 .fzsubtitle {
   font-size: 1.4rem;
 }
 .fztxt {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 .lh-titles {
   line-height: 1.1;
@@ -74,13 +74,24 @@ button {
 .lh-texto {
   line-height: 1.4;
 }
+.fw300 {
+  font-weight: 300;
+}
+.fw400 {
+  font-weight: 400;
+}
+.fw600 {
+  font-weight: 600;
+}
 .fw800 {
   font-weight: 800;
+}
+.txtMayusculas {
+  text-transform: uppercase;
 }
 /* ===========================================
     Formato
 ============================================ */
-
 
 .center {
   text-align: center;
@@ -92,30 +103,24 @@ button {
 .colorPrincipal {
   color: var(--color-principal);
 }
-
 .fondoPrincipal {
   background-color: var(--color-negro-5);
 }
-
 .fondoSecundario {
   background-color: var(--color-negro-25);
 }
-
 .borderNormal {
-  border: 1px solid var(--color-negro-25)
+  border: 1px solid var(--color-separacion)
 }
-
 .borderTop1px {
   border-top: 1px solid var(--color-separacion)
 }
 .borderBottom1px {
   border-bottom: 1px solid var(--color-separacion)
 }
-
 .borderRadius10 {
   border-radius: 10px;
 }
-
 .pad25px {
   padding: 25px;
 }
@@ -131,13 +136,14 @@ button {
 .pb50px {
   padding-bottom: 50px;
 }
-
 .mt40px {
   margin-top: 40px;
 }
-
 .mb40px {
   margin-bottom: 40px;
+}
+.mb20px {
+  margin-bottom: 20px;
 }
 p {
   font-family: var(--font-principal);
@@ -164,7 +170,8 @@ img {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 15px;
 }
 
 .gridContainer {
@@ -191,6 +198,9 @@ img {
     justify-content: center;
     gap: 15px;
   }
+    .fztitle {
+      font-size: 1.8rem;
+    }
 
 }
 
@@ -206,6 +216,9 @@ img {
   .gridContainer {
     grid-template: repeat(3, 1fr)/repeat(3, 1fr);
   }
+  .fztitle {
+    font-size: 2rem;
+  }
 
 }
 
@@ -218,6 +231,9 @@ img {
 @media screen and (min-width:1200px) {
   .container {
     width: 70%;
+  }
+  .fztitle {
+    font-size: 2.2rem;
   }
 
 }
