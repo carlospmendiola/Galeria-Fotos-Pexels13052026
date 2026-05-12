@@ -263,6 +263,17 @@ const obtenerFoto = async (id) => {
   }
 };
 
+const obtenerFotos = async ids => {
+  try {
+    const fotos = await Promise.all(ids.map(id => obtenerFoto(id)));
+
+    console.log(fotos);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const pintarGaleria = async (categoria, pagina) => {
   try {
     const datos = await buscarFotos(categoria, pagina);
