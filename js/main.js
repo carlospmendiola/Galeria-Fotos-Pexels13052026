@@ -52,6 +52,7 @@ const sectionGaleria = document.querySelector('#sectionGaleria');
 const sectionCategorias = document.querySelector('#sectionCategorias')
 const sectionPaginado = document.querySelector('#sectionPaginado')
 const sectionFiltrado = document.querySelector('#sectionFiltrado');
+const modalFavoritos = document.querySelector('#modalFavoritos');
 const categorias = [
   { nombre: 'coches', idFoto: 35035526 },
   { nombre: 'animales', idFoto: 34806620 },
@@ -156,9 +157,8 @@ document.addEventListener('click', ev => {
     }
 
     localStorage.setItem('favoritos', JSON.stringify(favoritos))
-
-    // console.log(ev.target.textContent)
-
+  } else if (ev.target.matches('#botonFavoritos')) {
+    modalFavoritos.classList.add('mostrar')
   }
 
   if (repintarGaleria) pintarGaleria(categoriaActual, paginaActual);
@@ -315,8 +315,7 @@ const pintarGaleria = async (categoria, pagina) => {
       img.alt = foto.alt;
       divCaption.append(h3, buttonFavorito);
       h3.textContent = foto.alt;
-      console.log(favoritos)
-      console.log(favoritos.includes(foto.id))
+
       if (favoritos.includes(foto.id)) {
         buttonFavorito.textContent = ('Quitar Favoritos');
         buttonFavorito.id = -foto.id;

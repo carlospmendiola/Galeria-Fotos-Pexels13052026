@@ -11,11 +11,17 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div id="modalFavoritos" class="modalFavoritos">
+    <div class="containerFavoritos pad25px center">
+      <h2>Listado Favoritos</h2>
+      <div></div>
+    </div>
+  </div>
   <header class="center p10px"><p class="fztitle fontSecundaria lh-titles fw400">Galería Imágenes con Pexels</p></header>
   <main class="container pb50px">
     <section class="flexContainer borderTop1px borderBottom1px p10px mb20px">
       <section id="pintarBusqueda"></section>
-      <section><p><a href="favoritos.html">Favoritos</a></p></section>
+      <section><button id="botonFavoritos">Favoritos</button></section>
     </section>
     <section id="sectionCategorias" class="mb40px"></section>
     <section id="sectionFiltrado" class="flexContainer"></section>
@@ -23,6 +29,7 @@
     <section id="sectionPaginado" class="flexContainer borderTop1px mt40px p10px"></section>
   </main>
   <footer class="center fondoPrincipal pad20px0"><p>©Ejercicios Bootcamp 2026</p></footer>
+  
 
   <script src="js/main.js"></script>
 </body>

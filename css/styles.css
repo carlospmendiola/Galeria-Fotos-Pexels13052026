@@ -38,8 +38,8 @@ table {
 /* ===========================================
     Formato textos
 ============================================== */
-h1 {
-  font: 400 2rem/1.1 var(--font-secundaria);
+h2 {
+  font: 400 1.6rem/1.1 var(--font-secundaria);
 }
 
 p {
@@ -124,6 +124,9 @@ button {
 .pad25px {
   padding: 25px;
 }
+.pad50px {
+  padding: 50px;
+}
 .pad20px0 {
   padding: 20px 0;
 }
@@ -166,6 +169,23 @@ img {
   width: 90%;
   margin: 20px auto;
 }
+.modalFavoritos {
+  width: 100%;
+  height: 100vh;
+  background: #131313cb;
+  position: absolute;
+  top: 0;
+  left:0;
+  z-index: 10;
+  display: none;
+}
+.containerFavoritos {
+  width: 80%;
+  min-height: 30px;
+  margin: 25px auto;
+  background-color: var(--color-bg-principal);
+}
+
 .flexContainer {
   display: flex;
   flex-direction: row;
@@ -186,6 +206,9 @@ img {
 
 .boxTxt h3 {
   font:400 1.1rem/1.2 var(--font-principal);
+}
+.mostrar {
+  display: block;
 }
 /* ===========================================
     Responsive 768
