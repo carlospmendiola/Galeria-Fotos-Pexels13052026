@@ -449,6 +449,8 @@ const generarSelect = (id, etiqueta, valores, valorPorDefecto) => {
   const select = document.createElement('select');
   const div = document.createElement('div');
 
+  div.classList.add('flexContainerCol', 'g5px', 'fz09rem', 'fw300','borderNormal','p5px','fontPrincipal')
+
   div.append(label,select);
 
   label.setAttribute('for', id);

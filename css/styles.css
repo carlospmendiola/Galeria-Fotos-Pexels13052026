@@ -68,6 +68,9 @@ button {
 .fztxt {
   font-size: 1.1rem;
 }
+.fz09rem {
+  font-size: .9rem;
+}
 .lh-titles {
   line-height: 1.1;
 }
@@ -140,6 +143,9 @@ button {
 .p10px {
   padding: 10px;
 }
+.p5px {
+  padding: 5px;
+}
 .pb50px {
   padding-bottom: 50px;
 }
@@ -149,8 +155,14 @@ button {
 .mb40px {
   margin-bottom: 40px;
 }
+.mt20px {
+  margin-top: 20px;
+}
 .mb20px {
   margin-bottom: 20px;
+}
+.g5px {
+  gap: 5px!important;
 }
 p {
   font-family: var(--font-principal);
@@ -165,12 +177,26 @@ p a {
 img {
   width: 100%;
 }
+input {
+  width: 30px;
+  border: 1px solid var(--color-negro-10);
+  border-radius: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 110%;
+}
+#sectionPaginado button {
+  padding: 5px 20px;
+  border-radius: 10px;
+  background-color: var(--color-negro-5);
+}
 
 /* ===========================================
     Arquitectura páginas
 ============================================== */
 .container {
-  width: 90%;
+  width: 95%;
   margin: 20px auto;
 }
 .modalFavoritos {
@@ -193,11 +219,12 @@ img {
 .flexContainer {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
 }
 .flexContainerCol {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 25px;
