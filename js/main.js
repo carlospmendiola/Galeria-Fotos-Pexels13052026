@@ -57,6 +57,7 @@ const categorias = [
   { nombre: 'animales', idFoto: 34806620 },
   { nombre: 'rascacielos', idFoto: 30657712 },
 ]
+const favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
 
 // Variables globales y valores por defecto de parámetros de búsqueda de Pexels.
 // TODO: Definir ¿enumeraciones? para los valores de las opciones.
@@ -142,6 +143,22 @@ document.addEventListener('click', ev => {
       paginaActual = Number(ev.target.value);
       repintarGaleria = true;
     }
+  } else if (ev.target.matches('#sectionGaleria button')) {
+    const idSaneado = Number(ev.target.id)
+    if (idSaneado >= 0) {
+      favoritos.push(Number(ev.target.id))
+      ev.target.textContent = ('Quitar Favoritos');
+      ev.target.id = -idSaneado;
+    } else {
+      favoritos.splice(favoritos.indexOf(idSaneado),1)
+      ev.target.textContent = ('Añadir Favoritos');
+      ev.target.id = -idSaneado;
+    }
+
+    localStorage.setItem('favoritos', JSON.stringify(favoritos))
+
+    // console.log(ev.target.textContent)
+
   }
 
   if (repintarGaleria) pintarGaleria(categoriaActual, paginaActual);
@@ -286,7 +303,7 @@ const pintarGaleria = async (categoria, pagina) => {
       const img = document.createElement('img');
       const divCaption = document.createElement('div');
       const h3 = document.createElement('h3');
-      const favorito = document.createElement('p');
+      const buttonFavorito = document.createElement('button');
 
       article.classList.add('boxImagen', 'borderRadius10', 'fondoPrincipal')
       divCaption.classList.add('pad25px', 'flexContainer')
@@ -296,10 +313,17 @@ const pintarGaleria = async (categoria, pagina) => {
       div.append(img);
       img.src = foto.src['large'];
       img.alt = foto.alt;
-      divCaption.append(h3, favorito);
+      divCaption.append(h3, buttonFavorito);
       h3.textContent = foto.alt;
-      // TODO: Recodar poner el id de la foto en un data attribute.
-      favorito.id = foto.id;
+      console.log(favoritos)
+      console.log(favoritos.includes(foto.id))
+      if (favoritos.includes(foto.id)) {
+        buttonFavorito.textContent = ('Quitar Favoritos');
+        buttonFavorito.id = -foto.id;
+      } else {
+        buttonFavorito.textContent = ('Añadir Favoritos');
+        buttonFavorito.id = foto.id;
+      }
 
       fragmento.append(article);
 
