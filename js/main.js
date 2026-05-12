@@ -52,6 +52,7 @@ const sectionGaleria = document.querySelector('#sectionGaleria');
 const sectionCategorias = document.querySelector('#sectionCategorias')
 const sectionPaginado = document.querySelector('#sectionPaginado')
 const sectionFiltrado = document.querySelector('#sectionFiltrado');
+const sectionBusqueda = document.querySelector('#sectionBusqueda');
 const modalFavoritos = document.querySelector('#modalFavoritos');
 const galeriaFavoritos = document.querySelector('#galeriaFavoritos');
 const btnCerrar = document.querySelector('#btnCerrar');
@@ -131,6 +132,7 @@ let imagenesPorPagina = 9;
 let paginaActual = 1;
 let paginasTotales = 1;
 let categoriaActual = '';
+let busqueda = '';
 
 //EVENTOS
 document.addEventListener('click', ev => {
@@ -140,6 +142,7 @@ document.addEventListener('click', ev => {
     const botonCategoria = ev.target.closest('button');
     if (categoriaActual !== botonCategoria.textContent) {
       ev.target.closest('ul').classList.remove('flexPortada');
+      sectionBusqueda.classList.add('mostrar');
       pintarFiltros();
       categoriaActual = botonCategoria.textContent;
       paginaActual = 1;
@@ -178,12 +181,12 @@ document.addEventListener('click', ev => {
     sectionGaleria.innerHTML = '';
     sectionPaginado.innerHTML = '';
     categoriaActual = '';
+    sectionBusqueda.classList.remove('mostrar');
     pintarCategorias(categorias);
   }
 
   if (repintarGaleria) pintarGaleria(categoriaActual, paginaActual);
 })
-
 
 document.addEventListener('keypress', (ev) => {
   if (ev.target.matches('#sectionPaginado input') && ev.key === 'Enter') {
@@ -194,6 +197,15 @@ document.addEventListener('keypress', (ev) => {
       ev.target.value = paginaSaneada;
     else if (paginaSaneada !== paginaActual) {
       paginaActual = paginaSaneada;
+      pintarGaleria(categoriaActual, paginaActual);
+    }
+  } else if (ev.target.matches('#sectionBusqueda input') && ev.key === 'Enter') {
+    const textoBusquedaSaneado = ev.target.value.replace(/[^\p{L}\p{N}\s]/gu, '').replace(/\s+/g, ' ').trim();
+
+    if (ev.target.value !== textoBusquedaSaneado)
+      ev.target.value = textoBusquedaSaneado;
+    else {
+      busqueda = textoBusquedaSaneado;
       pintarGaleria(categoriaActual, paginaActual);
     }
   }
@@ -250,7 +262,10 @@ const buscarFotos = async (categoria, pagina = 1) => {
   try {
     if (!categoria) throw 'No se especificó categoria para buscar imágenes.';
 
-    const parametrosDeBusqueda = new URLSearchParams({ query: categoria });
+    let queryText = categoria;
+    if (busqueda) queryText += ' ' + busqueda;
+
+    const parametrosDeBusqueda = new URLSearchParams({ query: queryText });
     if (orientacion) parametrosDeBusqueda.append('orientation', orientacion);
     if (tamanio) parametrosDeBusqueda.append('size', tamanio);
     if (color) parametrosDeBusqueda.append('color', color);
@@ -396,7 +411,7 @@ const pintarGaleria = async (categoria, pagina) => {
 const pintarGaleriaFavoritos = async () => {
   try {
     const fotosFavoritas = await obtenerFotos(favoritos);
-    console.log(fotosFavoritas);
+
     fotosFavoritas.forEach(fotoFavorita => {
       const article = document.createElement('article');
       const div = document.createElement('div');

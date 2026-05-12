@@ -215,6 +215,13 @@ input {
   border-radius: 10px;
   background-color: var(--color-negro-5);
 }
+.sectionBusqueda{
+  display: none;
+}
+#inputBusqueda {
+  width: 80%;
+  text-align: left;
+}
 
 /* ===========================================
     Arquitectura páginas
