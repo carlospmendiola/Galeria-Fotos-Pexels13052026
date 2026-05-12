@@ -51,6 +51,7 @@ const fragmento = document.createDocumentFragment();
 const sectionGaleria = document.querySelector('#sectionGaleria');
 const sectionCategorias = document.querySelector('#sectionCategorias')
 const sectionPaginado = document.querySelector('#sectionPaginado')
+const sectionFiltrado = document.querySelector('#sectionFiltrado');
 const categorias = [
   { nombre: 'coches', idFoto: 35035526 },
   { nombre: 'animales', idFoto: 34806620 },
@@ -245,6 +246,8 @@ const pintarGaleria = async (categoria, pagina) => {
     paginasTotales = Math.ceil(datos.total_results / datos.per_page);
     pintarPaginado(pagina, paginasTotales);
 
+    pintarFiltros();
+
     datos.photos.forEach(foto => {
       const article = document.createElement('article');
       const div = document.createElement('div');
@@ -254,8 +257,8 @@ const pintarGaleria = async (categoria, pagina) => {
       const favorito = document.createElement('p');
 
       article.classList.add('boxImagen', 'borderRadius10', 'fondoPrincipal')
-      divCaption.classList.add( 'pad25px', 'flexContainer')
-      h3.classList.add('colorPrincipal','fw300','fontSecundaria' )
+      divCaption.classList.add('pad25px', 'flexContainer')
+      h3.classList.add('colorPrincipal', 'fw300', 'fontSecundaria')
 
       article.append(div, divCaption);
       div.append(img);
@@ -359,7 +362,7 @@ const pintarCategorias = (categorias) => {
     const li = document.createElement('li')
     const button = document.createElement('button')
     button.textContent = categoria.nombre
-    button.classList.add('borderRadius10','txtCapitalize','fontPrincipal','fztxt','fw300','txtMayusculas')
+    button.classList.add('borderRadius10', 'txtCapitalize', 'fontPrincipal', 'fztxt', 'fw300', 'txtMayusculas')
 
     li.append(button)
     ul.append(li)
@@ -369,5 +372,54 @@ const pintarCategorias = (categorias) => {
 
 }
 
+const pintarFiltros = () => {
+  // orientacion
+  const labelOrientacion = document.createElement('label');
+  const selectOrientacion = document.createElement('select');
+
+  labelOrientacion.setAttribute('for', 'filtroOrientacion');
+  labelOrientacion.textContent = 'Orientación: ';
+  selectOrientacion.id = 'filtroOrientacion';
+  rellenarSelect(selectOrientacion, orientacionValores);
+
+  // tamaño
+  const labelTamanio = document.createElement('label');
+  const selectTamanio = document.createElement('select');
+
+  labelTamanio.setAttribute('for', 'filtroTamanio');
+  labelTamanio.textContent = 'Tamaño: ';
+  selectTamanio.id = 'filtroTamanio';
+  rellenarSelect(selectTamanio, tamanioValores);
+
+  // color
+  const labelColor = document.createElement('label');
+  const selectColor = document.createElement('select');
+
+  labelColor.setAttribute('for', 'filtroColor');
+  labelColor.textContent = 'Color: ';
+  selectColor.id = 'filtroColor';
+  rellenarSelect(selectColor, colorValores);
+
+  // idioma
+  const labelIdioma = document.createElement('label');
+  const selectIdioma = document.createElement('select');
+
+  labelIdioma.setAttribute('for', 'filtroIdioma');
+  labelIdioma.textContent = 'Idioma: ';
+  selectIdioma.id = 'filtroIdioma';
+  rellenarSelect(selectIdioma, idiomaValores);
+
+  fragmento.append(labelOrientacion, selectOrientacion, labelTamanio, selectTamanio, labelColor, selectColor, labelIdioma, selectIdioma);
+  sectionFiltrado.append(fragmento);
+};
+
+const rellenarSelect = (select, valores) => {
+  valores.forEach(valor => {
+    const optionElement = document.createElement('option');
+    optionElement.value = valor[0];
+    optionElement.textContent = valor[1];
+    select.append(optionElement);
+  });
+};
 
 pintarCategorias(categorias);
