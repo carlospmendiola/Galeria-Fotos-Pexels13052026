@@ -396,44 +396,24 @@ const pintarCategorias = (categorias) => {
 }
 
 const pintarFiltros = () => {
-  // orientacion
-  const labelOrientacion = document.createElement('label');
-  const selectOrientacion = document.createElement('select');
+  generarSelect('filtroOrientacion', 'Orientación: ', orientacionValores);
+  generarSelect('filtroTamanio', 'Tamaño: ', tamanioValores);
+  generarSelect('filtroColor', 'Color: ', colorValores);
+  generarSelect('filtroIdioma', 'Idioma: ', idiomaValores);
 
-  labelOrientacion.setAttribute('for', 'filtroOrientacion');
-  labelOrientacion.textContent = 'Orientación: ';
-  selectOrientacion.id = 'filtroOrientacion';
-  rellenarSelect(selectOrientacion, orientacionValores);
+  sectionFiltrado.replaceChildren(fragmento);
+};
 
-  // tamaño
-  const labelTamanio = document.createElement('label');
-  const selectTamanio = document.createElement('select');
+const generarSelect = (id, etiqueta, valores) => {
+  const label = document.createElement('label');
+  const select = document.createElement('select');
 
-  labelTamanio.setAttribute('for', 'filtroTamanio');
-  labelTamanio.textContent = 'Tamaño: ';
-  selectTamanio.id = 'filtroTamanio';
-  rellenarSelect(selectTamanio, tamanioValores);
+  label.setAttribute('for', id);
+  label.textContent = etiqueta;
+  select.id = id;
+  rellenarSelect(select, valores);
 
-  // color
-  const labelColor = document.createElement('label');
-  const selectColor = document.createElement('select');
-
-  labelColor.setAttribute('for', 'filtroColor');
-  labelColor.textContent = 'Color: ';
-  selectColor.id = 'filtroColor';
-  rellenarSelect(selectColor, colorValores);
-
-  // idioma
-  const labelIdioma = document.createElement('label');
-  const selectIdioma = document.createElement('select');
-
-  labelIdioma.setAttribute('for', 'filtroIdioma');
-  labelIdioma.textContent = 'Idioma: ';
-  selectIdioma.id = 'filtroIdioma';
-  rellenarSelect(selectIdioma, idiomaValores);
-
-  fragmento.append(labelOrientacion, selectOrientacion, labelTamanio, selectTamanio, labelColor, selectColor, labelIdioma, selectIdioma);
-  sectionFiltrado.append(fragmento);
+  fragmento.append(label, select);
 };
 
 const rellenarSelect = (select, valores) => {
