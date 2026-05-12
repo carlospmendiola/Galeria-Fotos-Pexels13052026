@@ -150,6 +150,8 @@ document.addEventListener('click', ev => {
       categoriaActual = botonCategoria.textContent;
       paginaActual = 1;
       repintarGaleria = true;
+      document.querySelector('#sectionCategorias button.pulsado')?.classList.remove('pulsado');
+      botonCategoria.classList.add('pulsado');
     }
   } else if (ev.target.matches('#sectionPaginado button')) {
     if (paginaActual !== Number(ev.target.value)) {

@@ -55,7 +55,6 @@ p {
 button {
   padding: 10px 25px;
   cursor: pointer;
-
 }
 .txtCapitalize {
   text-transform: capitalize;
@@ -184,6 +183,9 @@ button img {
   left: 0;
   width: 100%;
   z-index: -1;
+}
+button.pulsado {
+  background-color: lightsteelblue;
 }
 .flexPortada {
   height: 33dvw;
