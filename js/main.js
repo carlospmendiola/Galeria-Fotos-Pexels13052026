@@ -171,6 +171,7 @@ document.addEventListener('click', ev => {
     sectionFiltrado.innerHTML = '';
     sectionGaleria.innerHTML = '';
     sectionPaginado.innerHTML = '';
+    categoriaActual = '';
     pintarCategorias(categorias);
   }
 
